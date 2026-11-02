@@ -66,7 +66,8 @@ Do not use a default or shared password. Do not place the real `.env` file or cr
 | `DB_NAME` | Yes | Existing MySQL database/schema |
 | `DB_USER` | Yes | MySQL application user |
 | `DB_PASSWORD` | Yes for protected DBs | MySQL application password |
-| `DB_SSL` | No | Set `true` if your provider requires TLS |
+| `DB_SSL` | No | Set `true` for hosted MySQL connections using TLS |
+| `DB_SSL_CA` | No | PEM certificate authority text for MySQL TLS verification when the provider requires it |
 | `DB_CONNECTION_LIMIT` | No | Defaults to `10` |
 | `JWT_SECRET` | Yes | Unique random secret; never reuse a sample |
 | `ADMIN_NAME` | Optional | First administrator name |
@@ -92,6 +93,8 @@ For a working online application, you need:
 3. The environment variables above configured privately on the hosting service.
 4. The service start command `npm start`.
 5. A database created in advance. On first boot, RideZone applies the migrations automatically.
+
+The repository includes a `render.yaml` Blueprint for a free Singapore-region Node web service. It uses `npm ci`, `npm start`, and `/api/health`, and prompts for the MySQL connection values and first administrator credentials. The blueprint does not create a MySQL database. Aiven offers a free MySQL service, but its free tier has limited storage and can be powered off after inactivity. For Aiven TLS verification, provide the CA certificate in `DB_SSL_CA`.
 
 Do not use GitHub Pages as the only host: it can serve static files but cannot run `server.js` or connect to MySQL securely.
 
