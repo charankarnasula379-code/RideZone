@@ -2,6 +2,7 @@ services:
   - type: web
     name: ridezone
     runtime: node
+    region: singapore
     plan: free
     branch: main
     buildCommand: npm ci
@@ -20,6 +21,8 @@ services:
         sync: false
       - key: DB_SSL
         value: "true"
+      - key: DB_SSL_CA
+        sync: false
       - key: DB_CONNECTION_LIMIT
         value: "5"
       - key: JWT_SECRET
