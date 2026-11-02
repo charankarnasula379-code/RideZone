@@ -33,7 +33,10 @@ const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD || "";
 const DB_NAME = process.env.DB_NAME;
 const DB_PORT = parseInt(process.env.DB_PORT || "3306", 10);
-const DB_SSL = process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : undefined;
+const DB_SSL_CA = (process.env.DB_SSL_CA || "").replace(/\\n/g, "\n");
+const DB_SSL = process.env.DB_SSL === "true"
+  ? { rejectUnauthorized: true, ...(DB_SSL_CA ? { ca: DB_SSL_CA } : {}) }
+  : undefined;
 const DB_CONNECTION_LIMIT = Math.max(1, parseInt(process.env.DB_CONNECTION_LIMIT || "10", 10));
 const ADMIN_NAME = (process.env.ADMIN_NAME || "").trim();
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
