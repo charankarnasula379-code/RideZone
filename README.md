@@ -82,21 +82,38 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 Set the required values as **private environment variables in your hosting provider**. Only `.env.example` belongs in Git. Never paste database passwords or the JWT secret into a public repository.
 
-## Deploying online
+## Deploying online with Vercel
 
-This repository contains the application source. **GitHub stores the code; it does not run this Express server or host the MySQL database.**
+This repository includes `vercel.json` for the existing Express application. Vercel detects the root `server.js` application and runs it as a serverless Express function. The `public/` directory is deployed as static assets.
 
-For a working online application, you need:
+1. Open [Vercel New Project](https://vercel.com/new).
+2. Import `charankarnasula379-code/RideZone` from GitHub.
+3. Keep the Root Directory set to the repository root. Vercel should detect Express.
+4. Use Node.js 20 or newer. The repository requests Node.js 20+ in `package.json`.
+5. Add the required private environment variables in Vercel Project Settings → Environment Variables:
+   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+   - `DB_SSL=true` for hosted MySQL using TLS
+   - `DB_SSL_CA` when your MySQL provider supplies a CA certificate
+   - `JWT_SECRET` (generate a unique random secret)
+   - `DB_CONNECTION_LIMIT=2` initially to limit database connections across serverless instances
+   - `ADMIN_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` to provision the first administrator (password must be at least 12 characters)
+6. Create the MySQL database/schema named in `DB_NAME` with your database provider before the first deployment.
+7. Deploy. On cold start, RideZone applies pending migrations from `database/migrations/`.
 
-1. A Node.js web-service host that supports a persistent Express server.
-2. A hosted MySQL database reachable from that web service.
-3. The environment variables above configured privately on the hosting service.
-4. The service start command `npm start`.
-5. A database created in advance. On first boot, RideZone applies the migrations automatically.
+Do not paste credentials into GitHub or commit a real `.env` file. Configure them only in Vercel's private environment variable settings. Redeploy after adding or changing environment variables.
 
-The repository includes a `render.yaml` Blueprint for a free Singapore-region Node web service. It uses `npm ci`, `npm start`, and `/api/health`, and prompts for the MySQL connection values and first administrator credentials. The blueprint does not create a MySQL database. Aiven offers a free MySQL service, but its free tier has limited storage and can be powered off after inactivity. For Aiven TLS verification, provide the CA certificate in `DB_SSL_CA`.
+### Vercel limitations to understand
 
-Do not use GitHub Pages as the only host: it can serve static files but cannot run `server.js` or connect to MySQL securely.
+- Vercel runs this Express app as a serverless function, not as one permanently running Node process. Function instances can start, stop, and scale independently.
+- Vercel's Hobby plan is intended for personal, non-commercial use and includes monthly usage limits.
+- Vercel's deployment filesystem is read-only. RideZone uses `/tmp/ridezone-uploads` for uploads on Vercel so the upload endpoint can write, but these files are temporary and can disappear between instances or restarts. Use persistent object storage (for example, Cloudinary or Vercel Blob) before depending on admin image uploads.
+- Keep uploaded images and other persistent data out of local function storage. Vehicle images already committed under `public/` are deployed as static assets.
+- The external MySQL database is still required; Vercel does not create or host the current MySQL database for this project.
+- The in-memory rate limiter is local to an individual function instance and is not a shared global rate limiter.
+
+## Database hosting
+
+Aiven currently offers a free MySQL tier with 1 GB storage, 1 GB RAM, and a 76-connection limit. Free services may be powered off after prolonged inactivity and are not covered by Aiven's 99.99% SLA. Check the provider's current terms before relying on it. The MySQL provider's host, port, database name, username, password, and CA certificate must be configured privately in Vercel.
 
 ## Health check
 
