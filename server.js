@@ -44,7 +44,11 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 
 const app = express();
 
-const uploadsDir = path.join(__dirname, "uploads");
+// Vercel Functions have a read-only deployment filesystem; use /tmp for
+// temporary uploads there. Local deployments continue using ./uploads.
+const uploadsDir = process.env.VERCEL === "1"
+  ? path.join("/tmp", "ridezone-uploads")
+  : path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
