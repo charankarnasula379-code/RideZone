@@ -1,0 +1,30 @@
+{
+  "name": "ridezone",
+  "version": "1.0.0",
+  "description": "RideZone - Rent Your Perfect Ride",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "create-admin": "node database/seeds/create-admin.js",
+    "seed": "node database/seeds/update_db.js",
+    "db:test": "node database/test_connection.js",
+    "test": "node tests/run_all_security_tests.js",
+    "test:qa": "node tests/regression/phase5_final_verification.test.js",
+    "test:regression": "node tests/regression/phase5_1_functional_regression.test.js",
+    "audit:screens": "node tests/verification/verify_all_screens.js",
+    "audit:final": "node tests/verification/verify_final_pass.js",
+    "test:conditions": "node tests/verification/verify_mandatory_conditions.js",
+    "test:search": "node tests/verification/verify_fleet_search.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.23.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
