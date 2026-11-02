@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "express",
+  "regions": ["bom1"],
+  "functions": {
+    "server.js": {
+      "includeFiles": "{database/migrations/**/*.sql,public/**/*}"
+    }
+  }
+}
