@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reserve a Vehicle — RideZone Premium Motorcycle Rentals">
+  <title>Reserve a Vehicle — RideZone</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/screens/booking/booking.css">
+</head>
+<body>
+
+  <!-- Top Header with Single-Arrow Back Button -->
+  <header class="fullpage-header">
+    <a href="/vehicles" class="fullpage-back-btn" id="bookingBackBtn" aria-label="Back to vehicle details">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to Vehicle Details</span>
+    </a>
+    <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+      <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+    </a>
+  </header>
+
+  <main class="fullpage-container">
+    <div class="fullpage-page-header">
+      <span class="eyebrow">BOOK YOUR RIDE</span>
+      <h1 id="bookingTitle">Reserve a Vehicle</h1>
+      <p class="fullpage-page-sub">Configure your rental duration, choose pickup timings, and verify transparent pricing before proceeding to checkout.</p>
+    </div>
+
+    <form id="bookingForm" class="fullpage-workflow-grid">
+      <!-- Left Column: Rental Information & Mandatory Conditions -->
+      <div class="workflow-main-col">
+        <div class="fullpage-card">
+          <h2 class="workflow-section-title">Rental Information</h2>
+
+          <label class="fullpage-label">
+            <span class="label-text">Selected Vehicle</span>
+            <input name="vehicleDisplay" id="bookingVehicleDisplay" class="fullpage-input input-readonly" readonly value="Loading vehicle...">
+          </label>
+
+          <!-- Duration Presets -->
+          <div class="duration-group">
+            <span class="duration-label">Rental Duration</span>
+            <div class="duration-presets" id="durationPresets">
+              <button type="button" class="duration-btn active" data-mode="hourly">Hourly</button>
+              <button type="button" class="duration-btn" data-mode="halfday" data-hours="6">Half Day (6h)</button>
+              <button type="button" class="duration-btn" data-mode="fullday" data-hours="24">24 Hours</button>
+            </div>
+          </div>
+
+          <!-- Duration in Hours Input -->
+          <label id="hoursInputGroup" class="fullpage-label">
+            <span class="label-text">Duration in Hours (1 - 24)</span>
+            <input name="hours" id="bookingHoursInput" class="fullpage-input mono-num" type="number" min="1" max="24" value="2" required>
+          </label>
+
+          <!-- Pickup Datetime Row -->
+          <div class="booking-datetime-row">
+            <label class="fullpage-label">
+              <span class="label-text">Pickup Date</span>
+              <input name="pickupDate" id="bookingPickupDate" class="fullpage-input" type="date" required>
+            </label>
+
+            <label class="fullpage-label">
+              <span class="label-text">Pickup Time</span>
+              <input name="pickupTime" id="bookingPickupTime" class="fullpage-input" type="time" required>
+            </label>
+          </div>
+
+          <!-- Return Datetime Row -->
+          <div class="booking-datetime-row">
+            <label class="fullpage-label">
+              <span class="label-text">Return Date</span>
+              <input name="returnDate" id="bookingReturnDate" class="fullpage-input" type="date" required>
+            </label>
+
+            <label class="fullpage-label">
+              <span class="label-text">Return Time</span>
+              <input name="returnTime" id="bookingReturnTime" class="fullpage-input" type="time" required>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mandatory Rental Conditions Card -->
+        <div class="fullpage-card mandatory-conditions-card" id="mandatoryConditionsCard">
+          <div class="conditions-header-wrap">
+            <span class="conditions-badge">MANDATORY RENTAL CONDITIONS</span>
+            <h2 class="workflow-section-title" style="margin-bottom: 6px;">Before You Continue</h2>
+            <p class="conditions-intro-text">
+              Please review and acknowledge the following mandatory rental conditions from our Terms &amp; Conditions before proceeding to payment:
+            </p>
+          </div>
+
+          <!-- Highlights -->
+          <div class="conditions-highlights-box">
+            <div class="highlight-item">
+              <span class="hi-icon">🛡️</span>
+              <div>
+                <strong>100% Refundable Security Deposit:</strong>
+                The deposit (<span id="policyDepositDisplay" class="mono-num">₹1,000</span>) is refunded automatically to your original payment source immediately upon safe vehicle return and inspection verification.
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="hi-icon">⏱️</span>
+              <div>
+                <strong>1-Hour Full Refund Guarantee:</strong>
+                Reservations cancelled within 1 hour of booking creation receive a 100% full refund of both rental charges and security deposit.
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="hi-icon">🪪</span>
+              <div>
+                <strong>Original Physical Documents Required at Pickup:</strong>
+                A valid permanent Driving License (no LLR) and original Government ID matching your booking details must be presented at handover.
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="mandatory-checkbox-list" id="mandatoryConditionsList">
+            <label class="mandatory-condition-row" for="condEligibility">
+              <input type="checkbox" id="condEligibility" class="rental-condition-checkbox" name="cond_eligibility" required>
+              <span class="condition-text">
+                <strong>Rental Eligibility &amp; Verification:</strong> I confirm that I meet the rental eligibility requirements (at least 18 years of age, or 21+ for premium motorcycles) and will present a valid, permanent Driving License and original Government ID matching my booking at pickup.
+              </span>
+            </label>
+
+            <label class="mandatory-condition-row" for="condDepositCancellation">
+              <input type="checkbox" id="condDepositCancellation" class="rental-condition-checkbox" name="cond_terms_deposit" required>
+              <span class="condition-text">
+                <strong>Deposit, Return &amp; Cancellation:</strong> I agree to the RideZone rental guidelines, the 100% refundable security deposit policy upon vehicle inspection, and the 1-hour full refund cancellation and on-time return conditions.
+              </span>
+            </label>
+
+            <label class="mandatory-condition-row" for="condSafeUsage">
+              <input type="checkbox" id="condSafeUsage" class="rental-condition-checkbox" name="cond_safe_usage" required>
+              <span class="condition-text">
+                <strong>Responsible Usage &amp; Accuracy:</strong> I confirm that the information provided in this reservation is accurate, agree to mandatory helmet use with zero tolerance for intoxicated driving, and will not permit unauthorized third-party driving.
+              </span>
+            </label>
+          </div>
+
+          <div class="conditions-footer-links">
+            <a href="/terms" target="_blank" class="view-full-terms-link" rel="noopener noreferrer">
+              View Full Terms &amp; Conditions &rarr;
+            </a>
+            <span class="terms-supplementary-note">Opens complete legal document in a new tab &middot; Supplementary</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sticky Rental Summary -->
+      <div class="workflow-sidebar-col">
+        <div class="booking-summary-sticky-card">
+          <h2 class="workflow-section-title">Rental Summary</h2>
+
+          <div class="summary-breakdown-list">
+            <div class="summary-row">
+              <span>Rental Rate</span>
+              <span id="summaryRate" class="mono-num">₹280/hr</span>
+            </div>
+            <div class="summary-row">
+              <span>Duration</span>
+              <span id="summaryDuration" class="mono-num">2 hours</span>
+            </div>
+            <div class="summary-row">
+              <span>Rental Amount</span>
+              <span id="summaryRentalAmount" class="mono-num">₹560</span>
+            </div>
+            <div class="summary-row summary-deposit-row">
+              <span>Refundable Security Deposit <small class="deposit-tag">100% Refundable</small></span>
+              <span id="summaryDepositAmount" class="mono-num">₹1,000</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row summary-total">
+              <strong>Total Amount Payable</strong>
+              <strong id="summaryTotal" class="mono-num total-gold">₹1,560</strong>
+            </div>
+          </div>
+
+          <button class="primary-button fullpage-submit-btn" id="bookingProceedBtn" type="submit" disabled>
+            Proceed to Payment
+          </button>
+
+          <p class="form-message" id="bookingMessage"></p>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script src="/screens/booking/booking.js"></script>
+</body>
+</html>

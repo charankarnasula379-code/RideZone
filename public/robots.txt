@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/admin/
+Disallow: /api/user/
+
+Sitemap: http://localhost:3001/sitemap.xml

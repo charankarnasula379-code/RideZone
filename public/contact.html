@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact RideZone — Inquiries, vehicle reservation assistance, and project evaluation support.">
+  <title>Contact Us — RideZone Showroom</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page-transition">
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="RideZone Home">
+      <img src="/assets/logo.png" alt="RideZone — Rent. Ride. Explore." class="brand-logo-img" width="88" height="44">
+    </a>
+
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/vehicles">Vehicles</a>
+      <a class="nav-link" href="/how-it-works">How It Works</a>
+      <a class="nav-link" href="/about">About</a>
+      <a class="nav-link active" href="/contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="nav-auth-group">
+        <button type="button" class="btn-nav-login" id="openAuth">Login</button>
+        <button type="button" class="btn-nav-signup" id="openSignUp">Sign Up</button>
+      </div>
+
+      <button class="menu-button" id="menuButton" aria-label="Toggle navigation menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="info-container">
+    
+    <div class="info-hero-header">
+      <span class="eyebrow">GET IN TOUCH</span>
+      <h1>Contact RideZone</h1>
+      <p>
+        Have questions regarding vehicle specifications, reservation policies, or academic evaluation? Send us a message or visit our campus showroom hub.
+      </p>
+    </div>
+
+    <div class="contact-layout-grid">
+
+      <!-- Information Card -->
+      <div class="contact-card-info">
+        <div class="contact-info-entry">
+          <span class="contact-entry-title">Location</span>
+          <strong class="contact-entry-val">Showroom & Campus Hub</strong>
+          <span class="contact-entry-sub">Hyderabad, Telangana (TS 09 Zone)</span>
+        </div>
+
+        <div class="contact-info-entry">
+          <span class="contact-entry-title">Email Inquiries</span>
+          <strong class="contact-entry-val">support@ridezone.in</strong>
+          <span class="contact-entry-sub">Monitored for project feedback & reservations</span>
+        </div>
+
+        <div class="contact-info-entry">
+          <span class="contact-entry-title">Fleet Reservation</span>
+          <strong class="contact-entry-val">Online Booking Portal</strong>
+          <span class="contact-entry-sub">Live availability calendar accessible online</span>
+        </div>
+
+        <div class="contact-info-entry">
+          <span class="contact-entry-title">Vehicle Handover</span>
+          <strong class="contact-entry-val">Showroom Hub Desk</strong>
+          <span class="contact-entry-sub">Scheduled pickups verified with reservation code</span>
+        </div>
+      </div>
+
+      <!-- Interactive Contact Form -->
+      <div class="contact-card-form">
+        <h3 class="contact-form-heading">Send Us a Message</h3>
+        <form id="contactForm" class="contact-form-styled">
+          <div class="form-group contact-form-group">
+            <label for="contactName">Full Name *</label>
+            <input type="text" id="contactName" name="name" required minlength="2" maxlength="100" placeholder="e.g. Rahul Sharma" autocomplete="name" class="contact-input">
+          </div>
+
+          <div class="form-group contact-form-group">
+            <label for="contactEmail">Email Address *</label>
+            <input type="email" id="contactEmail" name="email" required maxlength="120" placeholder="e.g. rahul@example.com" autocomplete="email" class="contact-input">
+          </div>
+
+          <div class="form-group contact-form-group">
+            <label for="contactSubject">Subject *</label>
+            <input type="text" id="contactSubject" name="subject" required minlength="2" maxlength="200" placeholder="e.g. Fleet reservation inquiry" class="contact-input">
+          </div>
+
+          <div class="form-group contact-form-group">
+            <label for="contactMessage">Message *</label>
+            <textarea id="contactMessage" name="message" rows="5" required minlength="5" maxlength="2000" placeholder="How can our team assist you with your reservation or inquiry?" class="contact-textarea"></textarea>
+          </div>
+
+          <div id="contactFormMessage" class="form-message hidden" style="font-size:13.5px; padding:10px 14px; border-radius:6px; margin-top:4px;"></div>
+
+          <div class="contact-form-actions">
+            <button id="contactSubmitBtn" class="primary-button contact-submit-btn" type="submit">
+              <span class="btn-text">Send Message &rarr;</span>
+              <span class="btn-spinner hidden"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== SITE FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand-col">
+        <a class="brand footer-brand" href="/" aria-label="RideZone Home">
+          <img src="/assets/logo.png" alt="RideZone — Rent. Ride. Explore." class="footer-logo-img" width="104" height="52">
+        </a>
+        <p class="footer-brand-tagline">
+          Premium two-wheeler showroom and rental mobility platform. Curated fleet, transparent pricing, and instant online reservations.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/vehicles">All Vehicles</a></li>
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fleet Categories</h4>
+        <ul>
+          <li><a href="/vehicles">Electric Scooters</a></li>
+          <li><a href="/vehicles">Commuter Scooters</a></li>
+          <li><a href="/vehicles">Streetfighters</a></li>
+          <li><a href="/vehicles">Supersports</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support &amp; Trust</h4>
+        <ul>
+          <li><a href="/terms">Terms &amp; Policies</a></li>
+          <li><a href="/terms#refund-policy">Refund Policy</a></li>
+          <li><a href="/contact">Help &amp; Support</a></li>
+          <li><a href="/admin">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 RideZone Mobility Inc. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/terms">Privacy Policy</a>
+        <a href="/terms">Cancellation Rules</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SHARED AUTH & PROFILE MODALS ==================== -->
+  <!-- Auth Modal -->
+  <div class="modal hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="authModal" aria-label="Close modal">×</button>
+      <div class="modal-brand-header">
+        <img src="/assets/logo.png" alt="RideZone" class="modal-brand-logo" width="72" height="36">
+        <div>
+          <span class="eyebrow">WELCOME TO RIDEZONE</span>
+          <h2 id="authTitle">Login to RideZone</h2>
+        </div>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLogin">Login</button>
+        <button type="button" class="auth-tab" id="tabRegister">Sign Up</button>
+      </div>
+
+      <form id="loginForm">
+        <label>
+          Email Address
+          <input name="email" type="email" required placeholder="Enter your email address" autocomplete="email">
+        </label>
+        <label>
+          Password
+          <input name="password" type="password" required placeholder="Enter your password" autocomplete="current-password">
+        </label>
+        <button class="primary-button" type="submit">Log In</button>
+      </form>
+
+      <form id="registerForm" class="hidden">
+        <label>
+          Full Name
+          <input name="name" type="text" required placeholder="Enter your full name" autocomplete="name">
+        </label>
+        <label>
+          Email Address
+          <input name="email" type="email" required placeholder="Enter your email address" autocomplete="email">
+        </label>
+        <label>
+          Password
+          <input name="password" type="password" required minlength="6" placeholder="Enter password (min 6 chars)" autocomplete="new-password">
+        </label>
+        <label>
+          Phone Number (optional)
+          <input name="phone" type="tel" placeholder="Enter your phone number (optional)" autocomplete="tel">
+        </label>
+        <button class="primary-button" type="submit">Create Account</button>
+      </form>
+      <p class="form-message" id="authMessage"></p>
+
+      <div class="auth-role-switch">
+        <span>Administrator access?</span>
+        <a href="/admin" class="btn-auth-switch-admin" id="switchToAdminBtn">Admin Login &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULL-PAGE SCREEN: CUSTOMER ACCOUNT ==================== -->
+  <div class="modal fullpage-screen hidden" id="userProfileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <div class="fullpage-header">
+      <button type="button" class="fullpage-back-btn" data-back="profile" aria-label="Back to previous page">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>← Back</span>
+      </button>
+      <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+        <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+      </a>
+    </div>
+
+    <div class="fullpage-container">
+      <div class="fullpage-page-header">
+        <span class="eyebrow">CUSTOMER ACCOUNT</span>
+        <h1 id="profileTitle">Customer Account</h1>
+        <p class="fullpage-page-sub">Review your active reservations, verify rental history, or update your personal account information.</p>
+      </div>
+
+      <!-- Account Navigation Tabs -->
+      <nav class="account-nav-tabs" role="tablist" aria-label="Customer Account Views">
+        <button type="button" class="account-nav-tab active" id="accountTabUpcoming" role="tab" aria-selected="true" data-tab="upcoming">
+          Upcoming / Active Rental
+        </button>
+        <button type="button" class="account-nav-tab" id="accountTabHistory" role="tab" aria-selected="false" data-tab="history">
+          Booking History
+        </button>
+        <button type="button" class="account-nav-tab" id="accountTabProfile" role="tab" aria-selected="false" data-tab="profile">
+          Profile
+        </button>
+      </nav>
+
+      <!-- View 1: Upcoming / Active Rental -->
+      <div class="account-view-panel active" id="accountUpcomingView" role="tabpanel" aria-labelledby="accountTabUpcoming">
+        <div class="active-rental-box" id="activeRentalBox"></div>
+      </div>
+
+      <!-- View 2: Booking History -->
+      <div class="account-view-panel" id="accountHistoryView" role="tabpanel" aria-labelledby="accountTabHistory">
+        <div class="booking-history-list" id="bookingHistoryList"></div>
+      </div>
+
+      <!-- View 3: Profile Information -->
+      <div class="account-view-panel" id="accountProfileView" role="tabpanel" aria-labelledby="accountTabProfile">
+        <div class="profile-section-block">
+          <div class="profile-section-header-flex">
+            <div class="profile-section-title">Personal Information</div>
+            <button type="button" class="profile-edit-toggle-btn" id="toggleEditProfileBtn">Edit Profile</button>
+          </div>
+
+          <!-- View Mode -->
+          <div class="profile-user-card" id="profileViewCard">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" id="profileAvatarBox">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+              <label for="userProfilePhotoInput" class="avatar-photo-btn" title="Choose photo from device/laptop">
+                📷
+              </label>
+              <input type="file" id="userProfilePhotoInput" accept="image/*" class="hidden-file-input">
+            </div>
+            <div class="profile-user-meta">
+              <strong class="profile-name" id="profileUserName">Customer Name</strong>
+              <span class="profile-email" id="profileUserEmail">customer@example.com</span>
+              <span class="profile-phone" id="profileUserPhone">+91 XXXXX XXXXX</span>
+            </div>
+          </div>
+
+          <!-- Edit Mode Form -->
+          <form class="profile-edit-form hidden" id="profileEditForm">
+            <div class="profile-photo-edit-row">
+              <label class="photo-upload-label" for="editProfilePhotoInput">
+                <span class="photo-picker-btn">📁 Choose Photo from Laptop / Drive</span>
+              </label>
+              <input type="file" id="editProfilePhotoInput" accept="image/*" class="hidden-file-input">
+              <input type="hidden" id="editProfilePhotoUrl">
+              <span id="editProfilePhotoFileName" class="photo-filename-label">No photo selected</span>
+            </div>
+            <label class="fullpage-label">
+              <span class="label-text">Full Name</span>
+              <input type="text" id="editProfileName" class="fullpage-input" required placeholder="Enter full name" autocomplete="name">
+            </label>
+            <label class="fullpage-label">
+              <span class="label-text">Email Address</span>
+              <input type="email" id="editProfileEmail" class="fullpage-input" required placeholder="Enter email address" autocomplete="email">
+            </label>
+            <label class="fullpage-label">
+              <span class="label-text">Phone Number</span>
+              <input type="tel" id="editProfilePhone" class="fullpage-input" placeholder="Enter phone number" autocomplete="tel">
+            </label>
+            <div class="edit-form-actions">
+              <button class="primary-button edit-save-btn" id="saveProfileBtn" type="submit">Save Changes</button>
+              <button class="secondary-button edit-cancel-btn" id="cancelEditProfileBtn" type="button">Cancel</button>
+            </div>
+            <p class="form-message" id="editProfileMessage"></p>
+          </form>
+        </div>
+      </div>
+
+      <div class="profile-actions-bar">
+        <button class="secondary-button logout-trigger-btn" id="profileLogoutBtn" type="button">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Cancellation Modal -->
+  <div class="modal hidden" id="cancelBookingModal" role="dialog" aria-modal="true" aria-labelledby="cancelModalTitle">
+    <div class="modal-card modal-card-cancel">
+      <button class="modal-close" data-close="cancelBookingModal" aria-label="Close cancellation modal">×</button>
+      <div class="cancel-icon-circle">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </div>
+      <span class="eyebrow">CANCEL RESERVATION</span>
+      <h2 id="cancelModalTitle">Cancel Booking</h2>
+      <p class="cancel-subtitle">Cancellation is allowed only within 1 hour after booking creation with a 100% full refund.</p>
+
+      <div class="cancel-summary-box">
+        <div class="cancel-row">
+          <span>Booking Reference</span>
+          <strong class="confirm-ref" id="cancelBookingRef">RZ-00000000</strong>
+        </div>
+        <div class="cancel-row">
+          <span>Vehicle</span>
+          <strong id="cancelVehicleName">Vehicle Name</strong>
+        </div>
+        <div class="cancel-row">
+          <span>Scheduled Pickup</span>
+          <span id="cancelPickupSchedule">Date · Time</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="cancel-row">
+          <span>Rental Amount</span>
+          <span id="cancelRentalAmount">₹0</span>
+        </div>
+        <div class="cancel-row cancel-fee-row">
+          <span>Cancellation Fee</span>
+          <span id="cancelFeeAmount">₹0</span>
+        </div>
+        <div class="cancel-row">
+          <span>Refundable Rental Amount</span>
+          <span id="cancelRefundableRental">₹0</span>
+        </div>
+        <div class="cancel-row">
+          <span>Refundable Security Deposit <small class="deposit-tag">100% Refundable</small></span>
+          <span id="cancelDepositAmount">₹0</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="cancel-row cancel-total-row">
+          <strong>Total Refund Amount</strong>
+          <strong class="cancel-refund-val" id="cancelTotalRefund">₹0</strong>
+        </div>
+      </div>
+
+      <div class="cancel-actions">
+        <button class="secondary-button" data-close="cancelBookingModal" type="button">Keep Booking</button>
+        <button class="primary-button cancel-confirm-btn" id="confirmCancelBtn" type="button">Confirm Cancellation</button>
+      </div>
+      <p class="form-message" id="cancelMessage"></p>
+    </div>
+  </div>
+
+  <!-- Logout Modal -->
+  <div class="modal hidden" id="logoutModal" role="dialog" aria-modal="true" aria-labelledby="logoutTitle">
+    <div class="modal-card modal-card-logout">
+      <button class="modal-close" data-close="logoutModal" aria-label="Close modal">×</button>
+      <div class="logout-icon-circle">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+          <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+        </svg>
+      </div>
+      <span class="eyebrow">RIDEZONE ACCOUNT</span>
+      <h2 id="logoutTitle">Log out of RideZone?</h2>
+      <p class="logout-subtitle">Are you sure you want to log out of your account?</p>
+      <div class="logout-actions">
+        <button class="secondary-button" data-close="logoutModal" type="button">Cancel</button>
+        <button class="primary-button logout-confirm-btn" id="confirmLogoutBtn" type="button">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="/script.js"></script>
+</body>
+</html>

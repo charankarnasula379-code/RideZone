@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure Checkout — RideZone Demo Payment Gateway">
+  <title>Payment — RideZone</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/screens/payment/payment.css">
+</head>
+<body>
+
+  <!-- Top Header with Single-Arrow Back Button (Payment -> Back to Booking) -->
+  <header class="fullpage-header">
+    <a href="/screens/booking/index.html" class="fullpage-back-btn" id="paymentBackBtn" aria-label="Back to booking screen">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to Booking</span>
+    </a>
+    <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+      <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+    </a>
+  </header>
+
+  <main class="fullpage-container">
+    <div class="fullpage-page-header">
+      <span class="eyebrow">SECURE CHECKOUT</span>
+      <h1 id="paymentTitle">Payment</h1>
+      <div class="demo-badge">
+        <span>Demo Payment Gateway</span> — For College Project Evaluation. No real money is charged.
+      </div>
+    </div>
+
+    <div class="fullpage-workflow-grid">
+      <!-- Left Column: Payment Method -->
+      <div class="workflow-main-col">
+        <div class="fullpage-card">
+          <h2 class="workflow-section-title">Select Payment Method</h2>
+
+          <div class="payment-tabs" id="paymentTabs">
+            <button type="button" class="pay-tab active" data-method="UPI">UPI</button>
+            <button type="button" class="pay-tab" data-method="Credit / Debit Card">Credit / Debit Card</button>
+            <button type="button" class="pay-tab" data-method="Net Banking">Net Banking</button>
+          </div>
+
+          <!-- UPI Form -->
+          <div class="payment-method-form" id="upiForm">
+            <label class="fullpage-label">
+              <span class="label-text">Virtual Payment Address (UPI ID)</span>
+              <input type="text" id="upiIdInput" class="fullpage-input" placeholder="username@okhdfcbank or yourname@upi" value="student@okhdfcbank">
+            </label>
+            <div class="demo-qr-box">
+              <div class="demo-qr-graphic">
+                <svg viewBox="0 0 24 24" width="56" height="56" fill="currentColor">
+                  <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-5 0h2v3h-2v-3zm2 3h3v2h-3v-2zm3 0h3v5h-2v-3h-1v-2zm-5 2h2v3h-2v-3zm2 0h1v3h-1v-3z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Instant Demo UPI QR Verified</strong>
+                <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--text-muted);">Scan or enter any mock UPI handle to complete simulation</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Form -->
+          <div class="payment-method-form hidden" id="cardForm">
+            <label class="fullpage-label">
+              <span class="label-text">Cardholder Name</span>
+              <input type="text" id="cardNameInput" class="fullpage-input" placeholder="Name as on card" value="Rahul Sharma">
+            </label>
+            <label class="fullpage-label">
+              <span class="label-text">Card Number</span>
+              <input type="text" id="cardNumberInput" class="fullpage-input mono-num" maxlength="19" placeholder="4532 •••• •••• 8892" value="4532 9876 5432 8892">
+            </label>
+            <div class="card-inline-grid">
+              <label class="fullpage-label">
+                <span class="label-text">Expiry Date</span>
+                <input type="text" id="cardExpiryInput" class="fullpage-input mono-num" maxlength="5" placeholder="MM/YY" value="12/28">
+              </label>
+              <label class="fullpage-label">
+                <span class="label-text">CVV (Demo)</span>
+                <input type="password" id="cardCvvInput" class="fullpage-input mono-num" maxlength="3" placeholder="•••" value="123">
+              </label>
+            </div>
+          </div>
+
+          <!-- Net Banking Form -->
+          <div class="payment-method-form hidden" id="netbankingForm">
+            <label class="fullpage-label">
+              <span class="label-text">Choose Your Bank</span>
+              <select id="bankSelect" class="bank-select fullpage-input">
+                <option value="State Bank of India">State Bank of India (SBI)</option>
+                <option value="HDFC Bank" selected>HDFC Bank</option>
+                <option value="ICICI Bank">ICICI Bank</option>
+                <option value="Axis Bank">Axis Bank</option>
+                <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                <option value="Punjab National Bank">Punjab National Bank</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary with BOTH Pickup and Return Datetimes -->
+      <div class="workflow-sidebar-col">
+        <div class="booking-summary-sticky-card">
+          <h2 class="workflow-section-title">Order Summary</h2>
+
+          <div class="payment-summary-box">
+            <div class="payment-row">
+              <span>Vehicle</span>
+              <strong id="payVehicleName">Loading...</strong>
+            </div>
+            <div class="payment-row">
+              <span>Pickup</span>
+              <span id="payPickupSchedule" class="payment-datetime-val">--</span>
+            </div>
+            <div class="payment-row">
+              <span>Return</span>
+              <span id="payReturnSchedule" class="payment-datetime-val">--</span>
+            </div>
+            <div class="payment-row">
+              <span>Duration</span>
+              <span id="payDuration" class="mono-num">--</span>
+            </div>
+            <div class="payment-row">
+              <span>Rental Amount</span>
+              <span id="payRentalAmount" class="mono-num">₹0</span>
+            </div>
+            <div class="payment-row">
+              <span>Security Deposit <small class="deposit-tag">100% Refundable</small></span>
+              <span id="payDepositAmount" class="mono-num">₹1,000</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="payment-row payment-total-row">
+              <strong>Total Payable</strong>
+              <strong id="payTotalAmount" class="mono-num total-gold">₹0</strong>
+            </div>
+          </div>
+
+          <button class="primary-button" id="paymentSubmitBtn" type="button">
+            Confirm Payment (Demo)
+          </button>
+
+          <p class="form-message" id="paymentMessage"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/screens/payment/payment.js"></script>
+</body>
+</html>

@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RideZone — Premium Vehicle Rentals. Rent. Ride. Explore. Verified fleet, transparent pricing, and effortless booking.">
+  <title>RideZone — Premium Vehicle Rentals &amp; Showroom</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/screens/home/home.css">
+</head>
+<body class="page-transition">
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="RideZone Home">
+      <img src="/assets/logo.png" alt="RideZone — Rent. Ride. Explore." class="brand-logo-img" width="88" height="44">
+    </a>
+
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation">
+      <a class="nav-link active" href="/">Home</a>
+      <a class="nav-link" href="/vehicles">Vehicles</a>
+      <a class="nav-link" href="/how-it-works">How It Works</a>
+      <a class="nav-link" href="/about">About</a>
+      <a class="nav-link" href="/contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="btn-header-search" id="headerSearchBtn" aria-label="Search vehicles">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+
+      <div class="nav-auth-group">
+        <button type="button" class="btn-nav-login" id="openAuth">Login</button>
+        <button type="button" class="btn-nav-signup" id="openSignUp">Sign Up</button>
+      </div>
+
+      <button class="menu-button" id="menuButton" aria-label="Toggle navigation menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <!-- ==================== PREMIUM HERO SECTION (REDESIGNED) ==================== -->
+    <section class="home-hero-container">
+      
+      <!-- Integrated Background Hero Visual & Seamless Gradient Mask -->
+      <div class="home-hero-visual-bg">
+        <img src="/assets/media/home-hero.jpg" alt="RideZone Premium Vehicle Fleet" class="home-hero-visual-img" fetchpriority="high">
+        <div class="home-hero-fade-overlay"></div>
+      </div>
+
+      <!-- Editorial Typography Badges on Visual -->
+      <div class="hero-editorial-badge badge-top-right">
+        MORE<br>THAN A RIDE<br>A NEW HORIZON
+        <span class="editorial-accent-bar"></span>
+      </div>
+
+      <div class="hero-editorial-badge badge-bottom-right">
+        DISCOVER<br>FREEDOM
+        <span class="editorial-accent-bar"></span>
+      </div>
+
+      <!-- Hero Main Content Grid -->
+      <div class="home-hero-inner">
+        <div class="hero-editorial-content">
+          <span class="hero-eyebrow-text">PREMIUM VEHICLE RENTALS</span>
+          
+          <h1 class="hero-editorial-headline">
+            Rent.<br>
+            Ride.<br>
+            <span class="gold-word">Explore.</span>
+          </h1>
+
+          <p class="hero-editorial-desc">
+            Your journey starts here. Premium bikes, cars and jeeps for every adventure. Transparent pricing, verified vehicles, and effortless booking.
+          </p>
+
+          <a href="/vehicles" class="hero-cta-btn" id="heroExploreVehiclesBtn">
+            <span>Explore Vehicles</span>
+            <span class="arrow">→</span>
+          </a>
+
+          <!-- Grounded Statistics Row (Real Database Fleet Count) -->
+          <div class="hero-stats-bar">
+            <div class="hero-stat-block">
+              <span class="hero-stat-number" id="heroVehicleCount">9</span>
+              <span class="hero-stat-label">Verified Vehicles</span>
+            </div>
+
+            <div class="hero-stat-divider"></div>
+
+            <div class="hero-stat-block">
+              <span class="hero-stat-number">1 Hub</span>
+              <span class="hero-stat-label">Showroom &amp; Campus Hub</span>
+            </div>
+
+            <div class="hero-stat-divider"></div>
+
+            <div class="hero-stat-block">
+              <span class="hero-stat-number">100%</span>
+              <span class="hero-stat-label">Quality Verified Fleet</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Rounded Search / Booking Bar -->
+      <div class="home-search-panel-wrapper">
+        <form id="homeSearchForm" class="home-search-panel" role="search" aria-label="Vehicle booking search">
+          
+          <!-- FIELD 1: VEHICLE TYPE -->
+          <div class="search-field-unit">
+            <div class="search-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3 3 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+                <circle cx="7" cy="17" r="2"/>
+                <path d="M9 17h6"/>
+                <circle cx="17" cy="17" r="2"/>
+              </svg>
+            </div>
+            <div class="search-field-content">
+              <label for="searchVehicleType" class="search-field-label">Vehicle Type</label>
+              <select id="searchVehicleType" name="type" class="search-field-select" aria-label="Select Vehicle Type">
+                <option value="all">Cars, Bikes, Scooters, Jeeps</option>
+                <option value="Bikes">Bikes</option>
+                <option value="Scooters">Scooters</option>
+                <option value="Cars">Cars</option>
+                <option value="Jeeps">Jeeps</option>
+              </select>
+            </div>
+            <div class="search-field-divider" aria-hidden="true"></div>
+          </div>
+
+          <!-- FIELD 2: PICKUP LOCATION -->
+          <div class="search-field-unit">
+            <div class="search-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="search-field-content">
+              <label for="searchLocation" class="search-field-label">Pickup Location</label>
+              <select id="searchLocation" name="location" class="search-field-select" aria-label="Select Pickup Location">
+                <option value="Showroom & Campus Hub">Showroom &amp; Campus Hub</option>
+                <option value="City Center Showroom">City Center Showroom</option>
+                <option value="Airport Terminal Hub">Airport Terminal Hub</option>
+              </select>
+            </div>
+            <div class="search-field-divider" aria-hidden="true"></div>
+          </div>
+
+          <!-- FIELD 3: PICKUP DATE -->
+          <div class="search-field-unit">
+            <div class="search-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="search-field-content">
+              <label for="searchPickupDate" class="search-field-label">Pickup Date</label>
+              <input type="date" id="searchPickupDate" name="pickup" class="search-field-date-input" aria-label="Select Pickup Date" required>
+            </div>
+            <div class="search-field-divider" aria-hidden="true"></div>
+          </div>
+
+          <!-- FIELD 4: RETURN DATE -->
+          <div class="search-field-unit">
+            <div class="search-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="search-field-content">
+              <label for="searchReturnDate" class="search-field-label">Return Date</label>
+              <input type="date" id="searchReturnDate" name="return" class="search-field-date-input" aria-label="Select Return Date" required>
+            </div>
+          </div>
+
+          <!-- FIELD 5: SEARCH VEHICLES BUTTON -->
+          <button type="submit" class="search-submit-btn" id="homeSearchSubmitBtn" aria-label="Search Vehicles">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <span>Search Vehicles</span>
+          </button>
+
+          <!-- Accessible Validation Error Notification -->
+          <div class="search-validation-error hidden" id="searchValidationError">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <span id="searchValidationText">Return date cannot be earlier than pickup date.</span>
+          </div>
+        </form>
+      </div>
+
+    </section>
+
+    <!-- ==================== OUR PREMIUM COLLECTION (FEATURED VEHICLES) ==================== -->
+    <section class="featured-collection-section" id="featuredCollectionSection" aria-labelledby="featuredSectionTitle">
+      <div class="featured-collection-container">
+        
+        <div class="featured-header-row">
+          <div class="featured-title-group">
+            <span class="featured-eyebrow">FEATURED VEHICLES</span>
+            <h2 class="featured-heading" id="featuredSectionTitle">Our Premium Collection</h2>
+            <p class="featured-subtitle">Hand-picked vehicles for an exceptional rental experience</p>
+          </div>
+
+          <div class="featured-header-controls">
+            <div class="featured-carousel-nav" role="group" aria-label="Featured vehicle carousel navigation">
+              <button type="button" class="carousel-arrow-btn" id="featuredPrevBtn" aria-label="Previous vehicles" disabled>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="carousel-arrow-btn" id="featuredNextBtn" aria-label="Next vehicles">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+            <a class="featured-view-all-btn" href="/vehicles">
+              <span>View All Vehicles</span>
+              <span class="view-all-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="featured-carousel-wrapper">
+          <div class="featured-carousel-track" id="featuredCarouselTrack" role="region" aria-label="Featured vehicles carousel" tabindex="0">
+            <!-- Rendered dynamically from real API data -->
+            <div class="featured-card-skeleton" aria-hidden="true"></div>
+            <div class="featured-card-skeleton" aria-hidden="true"></div>
+            <div class="featured-card-skeleton" aria-hidden="true"></div>
+            <div class="featured-card-skeleton" aria-hidden="true"></div>
+            <div class="featured-card-skeleton" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="featured-error-state hidden" id="featuredErrorState" role="alert">
+          <p class="featured-error-msg" id="featuredErrorMsg">Unable to load vehicles. Please try again.</p>
+          <button type="button" class="featured-retry-btn" id="featuredRetryBtn">Try Again</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== SITE FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand-col">
+        <a class="brand footer-brand" href="/" aria-label="RideZone Home">
+          <img src="/assets/logo.png" alt="RideZone — Rent. Ride. Explore." class="footer-logo-img" width="104" height="52">
+        </a>
+        <p class="footer-brand-tagline">
+          Premium vehicle showroom and rental mobility platform. Curated fleet, transparent pricing, and instant online reservations.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/vehicles">All Vehicles</a></li>
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fleet Categories</h4>
+        <ul>
+          <li><a href="/vehicles">Electric Scooters</a></li>
+          <li><a href="/vehicles">Commuter Scooters</a></li>
+          <li><a href="/vehicles">Streetfighters</a></li>
+          <li><a href="/vehicles">Supersports</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support &amp; Trust</h4>
+        <ul>
+          <li><a href="/terms">Terms &amp; Policies</a></li>
+          <li><a href="/terms">Refund Policy</a></li>
+          <li><a href="/contact">Help &amp; Support</a></li>
+          <li><a href="/admin">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 RideZone Mobility Inc. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/terms">Privacy Policy</a>
+        <a href="/terms">Cancellation Rules</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== LOGIN / SIGN UP MODAL ==================== -->
+  <div class="modal hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="authModal" aria-label="Close modal">×</button>
+      <div class="modal-brand-header">
+        <img src="/assets/logo.png" alt="RideZone" class="modal-brand-logo" width="72" height="36">
+        <div>
+          <span class="eyebrow">WELCOME TO RIDEZONE</span>
+          <h2 id="authTitle">Login to RideZone</h2>
+        </div>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLogin">Login</button>
+        <button type="button" class="auth-tab" id="tabRegister">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm">
+        <label>
+          Email Address
+          <input name="email" type="email" required placeholder="Enter your email address" autocomplete="email">
+        </label>
+
+        <label>
+          Password
+          <input name="password" type="password" required placeholder="Enter your password" autocomplete="current-password">
+        </label>
+
+        <button class="primary-button" type="submit">
+          Log In
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="hidden">
+        <label>
+          Full Name
+          <input name="name" type="text" required placeholder="Enter your full name" autocomplete="name">
+        </label>
+
+        <label>
+          Email Address
+          <input name="email" type="email" required placeholder="Enter your email address" autocomplete="email">
+        </label>
+
+        <label>
+          Password
+          <input name="password" type="password" required minlength="6" placeholder="Enter your password (min 6 characters)" autocomplete="new-password">
+        </label>
+
+        <label>
+          Phone Number (optional)
+          <input name="phone" type="tel" placeholder="Enter your phone number (optional)" autocomplete="tel">
+        </label>
+
+        <button class="primary-button" type="submit">
+          Create Account
+        </button>
+      </form>
+
+      <p class="form-message" id="authMessage"></p>
+
+      <div class="auth-role-switch">
+        <span>Administrator access?</span>
+        <a href="/admin" class="btn-auth-switch-admin" id="switchToAdminBtn">Admin Login &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULL-PAGE SCREEN: RESERVE A VEHICLE ==================== -->
+  <div class="modal fullpage-screen hidden" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="fullpage-header">
+      <button type="button" class="fullpage-back-btn" data-back="booking" aria-label="Back to vehicle selection">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>← Back</span>
+      </button>
+      <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+        <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+      </a>
+    </div>
+
+    <div class="fullpage-container">
+      <div class="fullpage-page-header">
+        <span class="eyebrow">BOOK YOUR RIDE</span>
+        <h1 id="bookingTitle">Reserve a Vehicle</h1>
+        <p class="fullpage-page-sub">Configure your rental duration, choose pickup timings, and verify transparent pricing before proceeding to checkout.</p>
+      </div>
+
+      <form id="bookingForm" class="fullpage-workflow-grid">
+        <input type="hidden" name="vehicle" id="bookingVehicleInput">
+
+        <!-- Left Main Column -->
+        <div class="workflow-main-col">
+          <div class="fullpage-card">
+            <h2 class="workflow-section-title">Rental Information</h2>
+
+            <label class="fullpage-label">
+              <span class="label-text">Selected Vehicle</span>
+              <input name="vehicleDisplay" id="bookingVehicleDisplay" class="fullpage-input input-readonly" readonly>
+            </label>
+
+            <!-- Duration Selection Presets -->
+            <div class="duration-group">
+              <span class="duration-label">Rental Duration</span>
+              <div class="duration-presets" id="durationPresets">
+                <button type="button" class="duration-btn active" data-mode="custom">Hourly</button>
+                <button type="button" class="duration-btn" data-mode="halfday" data-hours="6">Half Day (6h)</button>
+                <button type="button" class="duration-btn" data-mode="fullday" data-hours="24">24 Hours</button>
+              </div>
+            </div>
+
+            <label id="hoursInputGroup" class="fullpage-label">
+              <span class="label-text">Duration in Hours (1 - 24)</span>
+              <input name="hours" id="bookingHoursInput" class="fullpage-input mono-num" type="number" min="1" max="24" value="2" required>
+            </label>
+
+            <div class="booking-datetime-grid">
+              <label class="fullpage-label">
+                <span class="label-text">Pickup Date</span>
+                <input name="date" id="bookingDateInput" class="fullpage-input" type="date" required>
+              </label>
+
+              <label class="fullpage-label">
+                <span class="label-text">Pickup Time</span>
+                <input name="time" id="bookingTimeInput" class="fullpage-input" type="time" required>
+              </label>
+            </div>
+          </div>
+
+          <!-- Mandatory Rental Conditions Card -->
+          <div class="fullpage-card mandatory-conditions-card" id="mandatoryConditionsCard">
+            <div class="conditions-header-wrap">
+              <span class="conditions-badge">MANDATORY RENTAL CONDITIONS</span>
+              <h2 class="workflow-section-title" style="margin-bottom: 6px;">Before You Continue</h2>
+              <p class="conditions-intro-text">
+                Please review and acknowledge the following mandatory rental conditions from our Terms &amp; Conditions before proceeding to payment:
+              </p>
+            </div>
+
+            <!-- Financial & Operational Highlights Box -->
+            <div class="conditions-highlights-box">
+              <div class="highlight-item">
+                <span class="hi-icon">🛡️</span>
+                <div>
+                  <strong>100% Refundable Security Deposit:</strong>
+                  The deposit (<span id="policyDepositDisplay" class="mono-num">₹1,000</span>) is refunded automatically to your original payment source immediately upon safe vehicle return and inspection verification.
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="hi-icon">⏱️</span>
+                <div>
+                  <strong>1-Hour Full Refund Guarantee:</strong>
+                  Reservations cancelled within 1 hour of booking creation receive a 100% full refund of both rental charges and security deposit.
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="hi-icon">🪪</span>
+                <div>
+                  <strong>Original Physical Documents Required at Pickup:</strong>
+                  A valid permanent Driving License (no LLR) and original Government ID matching your booking details must be presented at handover.
+                </div>
+              </div>
+            </div>
+
+            <!-- Mandatory Checkboxes List -->
+            <div class="mandatory-checkbox-list" id="mandatoryConditionsList">
+              <label class="mandatory-condition-row" for="condEligibility">
+                <input type="checkbox" id="condEligibility" class="rental-condition-checkbox" name="cond_eligibility" required>
+                <span class="condition-text">
+                  <strong>Rental Eligibility &amp; Verification:</strong> I confirm that I meet the rental eligibility requirements (at least 18 years of age, or 21+ for premium motorcycles) and will present a valid, permanent Driving License and original Government ID matching my booking at pickup.
+                </span>
+              </label>
+
+              <label class="mandatory-condition-row" for="condDepositCancellation">
+                <input type="checkbox" id="condDepositCancellation" class="rental-condition-checkbox" name="cond_deposit_cancellation" required>
+                <span class="condition-text">
+                  <strong>Security Deposit &amp; Cancellation Policy:</strong> I acknowledge that a security deposit is charged upfront and fully refunded upon safe return, and cancellations made within 1 hour of reservation qualify for a 100% full refund.
+                </span>
+              </label>
+
+              <label class="mandatory-condition-row" for="condSafeUsage">
+                <input type="checkbox" id="condSafeUsage" class="rental-condition-checkbox" name="cond_safe_usage" required>
+                <span class="condition-text">
+                  <strong>Safe Usage &amp; Accurate Information:</strong> I agree to operate the vehicle responsibly according to traffic regulations and declare that all details provided during booking and profile verification are accurate.
+                </span>
+              </label>
+            </div>
+
+            <p class="conditions-supplementary-note">
+              Read our full operational, insurance, and cancellation regulations in our <a href="/terms" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Summary Column -->
+        <div class="workflow-side-col">
+          <div class="fullpage-card summary-card">
+            <h2 class="workflow-section-title">Price Breakdown</h2>
+
+            <div class="summary-line">
+              <span>Rental Rate (<span id="summaryRateDisplay" class="mono-num">₹0/hr</span> × <span id="summaryHoursDisplay" class="mono-num">2h</span>)</span>
+              <span id="summaryBasePrice" class="mono-num">₹0</span>
+            </div>
+
+            <div class="summary-line">
+              <span>Refundable Security Deposit <small class="deposit-tag">100% Refundable</small></span>
+              <span id="summaryDeposit" class="mono-num">₹1,000</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-line total-line">
+              <strong>Total Payable Amount</strong>
+              <strong id="summaryTotalPrice" class="mono-num">₹1,000</strong>
+            </div>
+
+            <p class="summary-security-note">
+              🔒 256-Bit SSL Encrypted • Instant Booking Confirmation
+            </p>
+
+            <button class="primary-button fullpage-submit-btn is-disabled" id="bookingProceedBtn" type="button" disabled>
+              Proceed to Payment
+            </button>
+
+            <p class="form-message" id="bookingMessage"></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== FULL-PAGE SCREEN: SECURE PAYMENT GATEWAY ==================== -->
+  <div class="modal fullpage-screen hidden" id="paymentModal" role="dialog" aria-modal="true" aria-labelledby="paymentTitle">
+    <div class="fullpage-header">
+      <button type="button" class="fullpage-back-btn" data-back="payment" aria-label="Back to rental configuration">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>← Back to Booking</span>
+      </button>
+      <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+        <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+      </a>
+    </div>
+
+    <div class="fullpage-container">
+      <div class="fullpage-page-header">
+        <span class="eyebrow">CHECKOUT</span>
+        <h1 id="paymentTitle">Complete Your Reservation</h1>
+        <p class="fullpage-page-sub">Select your preferred payment instrument to confirm your vehicle reservation securely.</p>
+      </div>
+
+      <div class="fullpage-workflow-grid">
+        <div class="workflow-main-col">
+          <div class="fullpage-card">
+            <h2 class="workflow-section-title">Select Payment Instrument</h2>
+
+            <div class="payment-tabs" id="paymentMethodTabs">
+              <button type="button" class="pay-method-card active" data-method="upi">
+                <span class="pay-method-icon">⚡</span>
+                <strong>UPI / QR</strong>
+                <small>Google Pay, PhonePe, Paytm</small>
+              </button>
+
+              <button type="button" class="pay-method-card" data-method="card">
+                <span class="pay-method-icon">💳</span>
+                <strong>Debit / Credit Card</strong>
+                <small>Visa, MasterCard, RuPay</small>
+              </button>
+
+              <button type="button" class="pay-method-card" data-method="netbanking">
+                <span class="pay-method-icon">🏦</span>
+                <strong>Net Banking</strong>
+                <small>All Major Indian Banks</small>
+              </button>
+            </div>
+
+            <!-- UPI Payment Pane -->
+            <div class="pay-method-pane" id="paneUpi">
+              <label class="fullpage-label">
+                <span class="label-text">Virtual Payment Address (UPI ID)</span>
+                <input id="upiIdInput" class="fullpage-input" placeholder="username@okhdfcbank / mobile@paytm" autocomplete="off">
+              </label>
+              <div class="upi-or-divider"><span>OR SCAN QR CODE</span></div>
+              <div class="upi-qr-box">
+                <div class="mock-qr-code">
+                  <svg viewBox="0 0 100 100" width="120" height="120" fill="#121212">
+                    <rect x="10" y="10" width="30" height="30" fill="none" stroke="#121212" stroke-width="6"/>
+                    <rect x="20" y="20" width="10" height="10"/>
+                    <rect x="60" y="10" width="30" height="30" fill="none" stroke="#121212" stroke-width="6"/>
+                    <rect x="70" y="20" width="10" height="10"/>
+                    <rect x="10" y="60" width="30" height="30" fill="none" stroke="#121212" stroke-width="6"/>
+                    <rect x="20" y="70" width="10" height="10"/>
+                    <rect x="60" y="60" width="12" height="12"/>
+                    <rect x="78" y="60" width="12" height="12"/>
+                    <rect x="60" y="78" width="12" height="12"/>
+                    <rect x="78" y="78" width="12" height="12"/>
+                  </svg>
+                </div>
+                <span class="qr-label">Scan with any verified UPI application</span>
+              </div>
+            </div>
+
+            <!-- Card Payment Pane -->
+            <div class="pay-method-pane hidden" id="paneCard">
+              <label class="fullpage-label">
+                <span class="label-text">Card Number</span>
+                <input id="cardNumberInput" class="fullpage-input mono-num" placeholder="4532 •••• •••• 8910" maxlength="19" autocomplete="cc-number">
+              </label>
+              <div class="booking-datetime-grid">
+                <label class="fullpage-label">
+                  <span class="label-text">Expiry Date</span>
+                  <input id="cardExpiryInput" class="fullpage-input mono-num" placeholder="MM / YY" maxlength="5" autocomplete="cc-exp">
+                </label>
+                <label class="fullpage-label">
+                  <span class="label-text">CVV / CVC</span>
+                  <input id="cardCvvInput" class="fullpage-input mono-num" type="password" placeholder="•••" maxlength="4" autocomplete="cc-csc">
+                </label>
+              </div>
+              <label class="fullpage-label">
+                <span class="label-text">Name on Card</span>
+                <input id="cardNameInput" class="fullpage-input" placeholder="Cardholder Name" autocomplete="cc-name">
+              </label>
+            </div>
+
+            <!-- Net Banking Pane -->
+            <div class="pay-method-pane hidden" id="paneNetbanking">
+              <label class="fullpage-label">
+                <span class="label-text">Select Popular Bank</span>
+                <select id="bankSelectInput" class="fullpage-input">
+                  <option value="HDFC">HDFC Bank</option>
+                  <option value="SBI">State Bank of India (SBI)</option>
+                  <option value="ICICI">ICICI Bank</option>
+                  <option value="Axis">Axis Bank</option>
+                  <option value="Kotak">Kotak Mahindra Bank</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="workflow-side-col">
+          <div class="fullpage-card summary-card">
+            <h2 class="workflow-section-title">Order Summary</h2>
+
+            <div class="summary-line">
+              <span>Vehicle</span>
+              <strong id="paySummaryVehicle">Ather 450X</strong>
+            </div>
+            <div class="summary-line">
+              <span>Duration</span>
+              <span id="paySummaryHours">2 Hours</span>
+            </div>
+            <div class="summary-line">
+              <span>Rental Charges</span>
+              <span id="paySummaryRental" class="mono-num">₹0</span>
+            </div>
+            <div class="summary-line">
+              <span>Refundable Deposit</span>
+              <span id="paySummaryDeposit" class="mono-num">₹1,000</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-line total-line">
+              <strong>Total Payable</strong>
+              <strong id="paySummaryTotal" class="mono-num">₹1,000</strong>
+            </div>
+
+            <button class="primary-button fullpage-submit-btn" id="confirmPaymentBtn" type="button">
+              Pay &amp; Confirm Reservation
+            </button>
+
+            <p class="form-message" id="paymentMessage"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONFIRMATION MODAL ==================== -->
+  <div class="modal hidden" id="confirmationModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal-card modal-card-success">
+      <div class="success-icon-circle">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <span class="eyebrow">RESERVATION CONFIRMED</span>
+      <h2 id="confirmTitle">Your Ride is Booked!</h2>
+      <p class="confirmation-subtitle">Present your Reservation ID at the showroom hub at pickup time.</p>
+
+      <div class="booking-receipt-card">
+        <div class="receipt-header">
+          <span>RESERVATION ID</span>
+          <strong class="receipt-id mono-num" id="confirmBookingId">RZ-000000</strong>
+        </div>
+        <div class="receipt-grid">
+          <div><span>Vehicle</span><strong id="confirmVehicle">Ather 450X</strong></div>
+          <div><span>Pickup Date</span><strong id="confirmDate">2026-09-08</strong></div>
+          <div><span>Pickup Time</span><strong id="confirmTime">10:00 AM</strong></div>
+          <div><span>Duration</span><strong id="confirmHours">2 Hours</strong></div>
+          <div><span>Total Paid</span><strong class="mono-num" id="confirmTotal">₹0</strong></div>
+          <div><span>Deposit Status</span><strong class="text-success">Refundable (Held)</strong></div>
+        </div>
+      </div>
+
+      <div class="confirmation-actions">
+        <button class="secondary-button" data-close="confirmationModal" type="button">Done</button>
+        <button class="primary-button" id="confirmViewBookingsBtn" type="button">View My Bookings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== USER PROFILE / ACCOUNT DASHBOARD MODAL ==================== -->
+  <div class="modal hidden" id="userProfileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <div class="modal-card modal-card-profile">
+      <button class="modal-close" data-close="userProfileModal" aria-label="Close modal">×</button>
+
+      <div class="profile-modal-header">
+        <div class="user-avatar-large">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="eyebrow">CUSTOMER DASHBOARD</span>
+          <h2 id="profileTitle">My Account</h2>
+        </div>
+      </div>
+
+      <!-- Account Navigation Tabs -->
+      <nav class="account-nav-tabs" aria-label="Customer Account Navigation">
+        <button type="button" class="account-tab-btn is-active" id="accountTabUpcoming">
+          Upcoming Bookings
+        </button>
+        <button type="button" class="account-tab-btn" id="accountTabHistory">
+          Booking History
+        </button>
+        <button type="button" class="account-tab-btn" id="accountTabProfile">
+          Profile Details
+        </button>
+      </nav>
+
+      <!-- Account Tab Panels -->
+      <div class="account-tab-panel is-active" id="accountUpcomingView">
+        <div id="userUpcomingList" class="user-bookings-container">
+          <p class="text-muted">Loading your reservations...</p>
+        </div>
+      </div>
+
+      <div class="account-tab-panel" id="accountHistoryView">
+        <div id="userHistoryList" class="user-bookings-container">
+          <p class="text-muted">Loading your reservation history...</p>
+        </div>
+      </div>
+
+      <div class="account-tab-panel" id="accountProfileView">
+        <div class="account-profile-grid">
+          <div class="profile-info-row">
+            <span class="info-label">Full Name</span>
+            <strong class="info-val" id="profileNameDisplay">—</strong>
+          </div>
+          <div class="profile-info-row">
+            <span class="info-label">Email Address</span>
+            <strong class="info-val" id="profileEmailDisplay">—</strong>
+          </div>
+          <div class="profile-info-row">
+            <span class="info-label">Account Status</span>
+            <strong class="info-val text-success">Verified Active Customer</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-footer-actions">
+        <button type="button" class="secondary-button" id="btnHeaderLogout">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CANCELLATION MODAL ==================== -->
+  <div class="modal hidden" id="cancelBookingModal" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+    <div class="modal-card modal-card-cancel">
+      <button class="modal-close" data-close="cancelBookingModal" aria-label="Close modal">×</button>
+      <span class="eyebrow text-danger">CANCEL RESERVATION</span>
+      <h2 id="cancelTitle">Confirm Cancellation</h2>
+      <p class="cancel-modal-sub">Please review the refundable amounts calculated under RideZone policy:</p>
+
+      <div class="cancel-summary-box">
+        <div class="cancel-row">
+          <span>Booking ID</span>
+          <strong class="mono-num" id="cancelBookingId">RZ-000000</strong>
+        </div>
+        <div class="cancel-row">
+          <span>Gross Rental Charges</span>
+          <span id="cancelGrossRental">₹0</span>
+        </div>
+        <div class="cancel-row">
+          <span>Cancellation Fee (Policy)</span>
+          <span id="cancelFeeAmount">₹0</span>
+        </div>
+        <div class="cancel-row">
+          <span>Refundable Rental Amount</span>
+          <span id="cancelRefundableRental">₹0</span>
+        </div>
+        <div class="cancel-row">
+          <span>Refundable Security Deposit <small class="deposit-tag">100% Refundable</small></span>
+          <span id="cancelDepositAmount">₹0</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="cancel-row cancel-total-row">
+          <strong>Total Refund Amount</strong>
+          <strong class="cancel-refund-val" id="cancelTotalRefund">₹0</strong>
+        </div>
+      </div>
+
+      <p class="cancel-policy-note">
+        Under RideZone policy, bookings cancelled within 1 hour of creation receive a 100% full refund with zero cancellation fees.
+      </p>
+
+      <div class="cancel-actions">
+        <button class="secondary-button" data-close="cancelBookingModal" type="button">Keep Booking</button>
+        <button class="primary-button cancel-confirm-btn" id="confirmCancelBtn" type="button">Confirm Cancellation</button>
+      </div>
+
+      <p class="form-message" id="cancelMessage"></p>
+    </div>
+  </div>
+
+  <!-- ==================== LOGOUT CONFIRMATION MODAL ==================== -->
+  <div class="modal hidden" id="logoutModal" role="dialog" aria-modal="true" aria-labelledby="logoutTitle">
+    <div class="modal-card modal-card-logout">
+      <button class="modal-close" data-close="logoutModal" aria-label="Close modal">×</button>
+      
+      <div class="logout-icon-circle">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+          <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+        </svg>
+      </div>
+
+      <span class="eyebrow">RIDEZONE ACCOUNT</span>
+      <h2 id="logoutTitle">Log out of RideZone?</h2>
+      <p class="logout-subtitle">Are you sure you want to log out of your account?</p>
+
+      <div class="logout-actions">
+        <button class="secondary-button" data-close="logoutModal" type="button">Cancel</button>
+        <button class="primary-button logout-confirm-btn" id="confirmLogoutBtn" type="button">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="/script.js"></script>
+  <script src="/screens/home/home.js"></script>
+</body>
+</html>

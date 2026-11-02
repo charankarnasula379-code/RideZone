@@ -1,0 +1,108 @@
+/* ============================================================
+   RideZone Modular Vehicles Screen Stylesheet
+   public/screens/vehicles/vehicles.css
+   ============================================================ */
+
+.search-active-banner {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  animation: bannerFadeIn 0.25s ease;
+}
+
+.search-active-banner-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  color: #92400E;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-active-banner-text strong {
+  color: #78350F;
+  font-weight: 600;
+}
+
+.btn-clear-search-banner {
+  background: #FFFFFF;
+  border: 1px solid #FCD34D;
+  color: #78350F;
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-clear-search-banner:hover {
+  background: #FEF3C7;
+  border-color: #F59E0B;
+}
+
+.special-fleet-empty-state {
+  grid-column: 1 / -1;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 56px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 20px auto 40px auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.special-empty-icon {
+  font-size: 42px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.special-fleet-empty-state h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #121212;
+  margin: 0 0 10px 0;
+}
+
+.special-fleet-empty-state p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #4B5563;
+  margin: 0 0 24px 0;
+}
+
+.btn-reset-fleet-special {
+  background-color: #F4B400;
+  color: #121212;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reset-fleet-special:hover {
+  background-color: #D99800;
+  transform: translateY(-1px);
+}
+
+@keyframes bannerFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

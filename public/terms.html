@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions — RideZone Vehicle Rentals</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --primary-hover: #D99800;
+      --contrast: #121212;
+      --background: #FAFAFA;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+
+      --gold-primary: #F4B400;
+      --gold-dark: #D99800;
+      --gold-hover: #D99800;
+      --gold-light: #FEEFB3;
+      --gold-cream: #FEF9E7;
+
+      --charcoal: #1A1A1A;
+      --text-secondary: #6B7280;
+      --muted: #6B7280;
+      --muted-light: #9CA3AF;
+
+      --bg: #FAFAFA;
+      --surface-soft: #F4F4F5;
+      --surface-alt: #E5E7EB;
+      --line: #E5E7EB;
+      --line-strong: #D1D5DB;
+
+      --radius-xs: 4px;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+      --font-serif: var(--font-display);
+      --font-sans: var(--font-body);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--charcoal);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Minimalist Top Header */
+    .terms-header {
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .brand-logo:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .brand-logo-img {
+      height: 44px;
+      width: auto;
+      aspect-ratio: 2 / 1;
+      object-fit: contain;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .terms-footer-logo {
+      height: 42px;
+      width: auto;
+      aspect-ratio: 2 / 1;
+      object-fit: contain;
+      display: inline-block;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      border-color: var(--charcoal);
+      background: var(--surface);
+      transform: translateX(-2px);
+    }
+
+    /* Editorial Hero Section */
+    .terms-hero {
+      background: var(--surface-soft);
+      border-bottom: 1px solid var(--line);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .hero-container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      border: 1px solid var(--line);
+      padding: 3px 10px;
+      border-radius: var(--radius-xs);
+      background: var(--surface);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: var(--charcoal);
+    }
+
+    .hero-subtitle {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .meta-tagline {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* Editorial Main Content Layout */
+    .terms-main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    .editorial-intro {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    .editorial-section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .editorial-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-num {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold-dark);
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+    }
+
+    .editorial-section p {
+      margin-bottom: 1.25rem;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+    }
+
+    .editorial-section ul {
+      margin: 1rem 0 1.5rem 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+    }
+
+    .editorial-section li {
+      margin-bottom: 0.6rem;
+    }
+
+    .editorial-section strong {
+      color: var(--charcoal);
+    }
+
+    /* Refined Callout Box */
+    .editorial-callout {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold-primary);
+      border-radius: var(--radius-xs);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    .editorial-callout strong {
+      display: block;
+      color: var(--charcoal);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Footer Back Action */
+    .terms-footer-action {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+
+    .terms-footer-action p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimalist Header -->
+  <header class="terms-header">
+    <div class="header-container">
+      <a href="/" class="brand-logo" aria-label="RideZone Home">
+        <img src="/assets/logo.png" alt="RideZone — Rent. Ride. Explore." class="brand-logo-img" width="88" height="44">
+      </a>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="/vehicles" class="btn-back">
+          View Fleet
+        </a>
+        <a href="/" class="btn-back">
+          &larr; Back to Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Editorial Hero Section -->
+  <section class="terms-hero">
+    <div class="hero-container">
+      <span class="hero-eyebrow">RIDEZONE LEGAL &amp; POLICIES</span>
+      <h1 class="hero-title">Terms &amp; Conditions</h1>
+      <p class="hero-subtitle">
+        Transparent rental guidelines, refundable security deposit rules, and cancellation policies designed for a safe and hassle-free journey.
+      </p>
+      <div class="meta-tagline">
+        Effective August 2026 &middot; Version 2.4 &middot; Yanam &amp; Puducherry UT
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Editorial Content -->
+  <main class="terms-main">
+    
+    <div class="editorial-intro">
+      <p>
+        Welcome to <strong>RideZone</strong>. These Terms &amp; Conditions govern the rental and use of all motorized two-wheelers, electric scooters, and high-performance motorcycles made available through our platform. By reserving, booking, or operating any RideZone vehicle, you acknowledge that you have read, understood, and agreed to these terms in full.
+      </p>
+    </div>
+
+    <!-- Chapter 01 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">01</span>
+        <h2 class="section-heading">Rental Eligibility &amp; Verification</h2>
+      </div>
+      <p>
+        To ensure platform safety and statutory compliance under the Motor Vehicles Act, all riders must meet the following mandatory criteria prior to vehicle handover:
+      </p>
+      <ul>
+        <li><strong>Minimum Age:</strong> The rider must be at least 18 years of age (or 21 years of age for high-end motorcycles including the KTM RC 390 and Kawasaki Ninja 300).</li>
+        <li><strong>Valid Driving License:</strong> A permanent, valid Indian Driving License (or International Driving Permit along with a valid Passport) authorizing the operation of gear or non-gear two-wheelers. Learner's Licenses (LLR) are strictly not accepted.</li>
+        <li><strong>Government Identity Proof:</strong> An original Aadhaar Card, Passport, or Voter ID must be presented for physical verification at pickup.</li>
+      </ul>
+      <div class="editorial-callout">
+        <strong>Strict Identity Verification</strong>
+        The registered booking name must match the name on the driving license. Third-party driving or transferring the vehicle to unauthorized individuals is strictly prohibited and voids all coverage.
+      </div>
+    </article>
+
+    <!-- Chapter 02 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">02</span>
+        <h2 class="section-heading">Bookings, Hourly Rates &amp; Payments</h2>
+      </div>
+      <p>
+        RideZone operates on transparent hourly pricing with zero hidden surcharge fees. The rental charge begins at the scheduled pickup time selected during booking.
+      </p>
+      <ul>
+        <li><strong>Transparent Pricing:</strong> All listed rates include standard maintenance, complimentary helmet, and comprehensive third-party insurance.</li>
+        <li><strong>Fuel Policy:</strong> Vehicles are delivered with sufficient fuel to reach the nearest fueling station. Riders must return the vehicle with an equivalent fuel level. No cash refunds are provided for excess fuel upon return.</li>
+        <li><strong>Payment Methods:</strong> We accept all standard digital payment instruments including UPI, Credit/Debit Cards, and Net Banking.</li>
+      </ul>
+    </article>
+
+    <!-- Chapter 03 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">03</span>
+        <h2 class="section-heading">100% Refundable Security Deposit</h2>
+      </div>
+      <p>
+        To ensure the safe return and responsible usage of our fleet, a refundable security deposit is collected at the time of reservation:
+      </p>
+      <ul>
+        <li><strong>Deposit Scale:</strong> Standard Scooters (Activa 6G, Access 125): ₹1,000 &middot; Electric (Ather 450X): ₹1,500 &middot; Street Bikes (MT-15, Pulsar NS200): ₹2,000 &middot; Premium Supersports (KTM RC 390, Ninja 300): ₹3,000–₹3,500.</li>
+        <li><strong>Refund Timeline:</strong> 100% of the deposit is automatically refunded to the original payment source immediately upon vehicle return and inspection verification.</li>
+        <li><strong>Deductions:</strong> Deductions occur only in cases of verifiable accidental damage, unpaid traffic violations (challans), or extreme delayed return beyond agreed grace windows.</li>
+      </ul>
+    </article>
+
+    <!-- Chapter 04 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">04</span>
+        <h2 class="section-heading">Cancellation &amp; 1-Hour Full Refund Policy</h2>
+      </div>
+      <p>
+        We understand plans change. RideZone provides a risk-free cancellation guarantee:
+      </p>
+      <div class="editorial-callout">
+        <strong>1-Hour Full Refund Guarantee</strong>
+        Any reservation cancelled within <strong>1 hour of booking creation</strong> receives a <strong>100% full refund</strong> with zero cancellation charges. Both the rental amount and security deposit are refunded immediately.
+      </div>
+      <p>
+        For cancellations requested after 1 hour from booking creation:
+      </p>
+      <ul>
+        <li>A nominal vehicle reservation fee (₹50–₹350 depending on category) is retained to compensate for blocked calendar availability.</li>
+        <li>The remaining rental balance and 100% of the security deposit are returned in full.</li>
+      </ul>
+    </article>
+
+    <!-- Chapter 05 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">05</span>
+        <h2 class="section-heading">Responsible Vehicle Usage &amp; Safety</h2>
+      </div>
+      <p>
+        Riders must operate the vehicle in strict accordance with traffic safety regulations and local laws:
+      </p>
+      <ul>
+        <li><strong>Helmets Mandatory:</strong> Wearing an ISI-certified helmet is strictly mandatory for both the rider and pillion at all times.</li>
+        <li><strong>Zero Tolerance:</strong> Riding under the influence of alcohol, narcotics, or intoxicating substances is strictly prohibited and subject to immediate vehicle confiscation and police reporting.</li>
+        <li><strong>Speed &amp; Stunts:</strong> Overspeeding beyond statutory limits, racing, stunting, or off-road misuse is prohibited.</li>
+      </ul>
+    </article>
+
+    <!-- Chapter 06 -->
+    <article class="editorial-section">
+      <div class="section-header-row">
+        <span class="section-num">06</span>
+        <h2 class="section-heading">Damage, Insurance &amp; Liability</h2>
+      </div>
+      <p>
+        In the event of an unforeseen accident, collision, or mechanical issue during the rental period:
+      </p>
+      <ul>
+        <li><strong>Immediate Reporting:</strong> Notify the RideZone support helpline immediately (+91 98765 43210). Do not attempt third-party unauthorized repairs.</li>
+        <li><strong>Insurance Coverage:</strong> Standard third-party liability is covered under our master commercial fleet insurance policy.</li>
+        <li><strong>Rider Liability:</strong> Rider liability for minor accidental cosmetic damage is capped at the security deposit amount, except in instances of gross negligence, reckless driving, or driving under the influence.</li>
+      </ul>
+    </article>
+
+    <!-- Footer Action -->
+    <div class="terms-footer-action">
+      <a href="/" aria-label="RideZone Home">
+        <img src="/assets/logo.png" alt="RideZone" class="terms-footer-logo" width="84" height="42">
+      </a>
+      <p>RideZone Vehicle Rental Platform &copy; 2026. All rights reserved.</p>
+      <a href="/" class="btn-back">&larr; Return to Home</a>
+    </div>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+/* ============================================================
+   RideZone Modular Customer Profile & Bookings Stylesheet
+   public/screens/profile/profile.css
+   ============================================================ */
+
+:root {
+  --primary: #F4B400;
+  --primary-hover: #D99800;
+  --contrast: #121212;
+  --background: #FAFAFA;
+  --surface: #FFFFFF;
+  --text: #1A1A1A;
+  --text-muted: #6B7280;
+  --border: #E5E7EB;
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.fullpage-header {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fullpage-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F4F4F5;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fullpage-back-btn svg {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.fullpage-back-btn:hover,
+.fullpage-back-btn:focus-visible {
+  background: var(--primary);
+  color: var(--contrast);
+  border-color: var(--primary-hover);
+  box-shadow: 0 2px 10px rgba(244, 180, 0, 0.28);
+}
+
+.fullpage-back-btn:hover svg,
+.fullpage-back-btn:focus-visible svg {
+  transform: translateX(-3px);
+}
+
+.fullpage-brand-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.fullpage-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Container */
+.fullpage-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.fullpage-page-header {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B88000;
+  background: #FEF9C3;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.fullpage-page-header h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--contrast);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+/* Tabs */
+.account-nav-tabs {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.account-nav-tab {
+  padding: 12px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-nav-tab:hover {
+  color: var(--text);
+}
+
+.account-nav-tab.active {
+  color: var(--contrast);
+  border-bottom-color: var(--primary);
+  font-weight: 700;
+}
+
+.tab-badge {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #F4F4F5;
+  border: 1px solid var(--border);
+}
+
+/* Panel */
+.account-view-panel {
+  display: none;
+}
+
+.account-view-panel.active {
+  display: block;
+}
+
+/* Booking Cards */
+.upcoming-booking-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.upcoming-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.upcoming-thumb-wrap {
+  width: 72px;
+  height: 52px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #F4F4F5;
+  flex-shrink: 0;
+}
+
+.upcoming-thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upcoming-vehicle-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--contrast);
+}
+
+.upcoming-meta-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.booking-state-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #FEF9C3;
+  color: #854D0E;
+}
+
+.booking-state-badge.state-active {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.active-reg-no {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* Details Grid */
+.upcoming-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  background: #F9FAFB;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.upcoming-detail-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.upcoming-detail-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.upcoming-detail-val {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upcoming-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Empty State */
+.account-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.account-empty-state h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.account-empty-state p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--primary);
+  border: 1px solid var(--primary-hover);
+  border-radius: 8px;
+  color: var(--contrast);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.primary-button:hover {
+  background: var(--primary-hover);
+}
+
+@media (max-width: 640px) {
+  .fullpage-header {
+    padding: 12px 16px;
+  }
+  .fullpage-container {
+    padding: 24px 16px 60px;
+  }
+  .upcoming-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .upcoming-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

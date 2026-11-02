@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My Account & Bookings — RideZone Customer Profile">
+  <title>My Profile & Bookings — RideZone</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/screens/profile/profile.css">
+</head>
+<body>
+
+  <!-- Top Header with Single-Arrow Back Button -->
+  <header class="fullpage-header">
+    <a href="/vehicles" class="fullpage-back-btn" id="profileBackBtn" aria-label="Back to vehicles">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to Vehicles</span>
+    </a>
+    <a href="/" class="fullpage-brand-link" aria-label="RideZone Home">
+      <img src="/assets/logo.png" alt="RideZone" class="fullpage-logo-img" width="88" height="44">
+    </a>
+  </header>
+
+  <main class="fullpage-container">
+    <div class="fullpage-page-header">
+      <span class="eyebrow">MY ACCOUNT</span>
+      <h1>Customer Profile &amp; Bookings</h1>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="account-nav-tabs">
+      <button type="button" class="account-nav-tab active" id="accountTabUpcoming">
+        Upcoming Rentals
+      </button>
+      <button type="button" class="account-nav-tab" id="accountTabHistory">
+        Booking History
+      </button>
+    </div>
+
+    <!-- Tab 1: Upcoming Rentals -->
+    <div class="account-view-panel active" id="accountUpcomingView">
+      <div id="upcomingList">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+
+    <!-- Tab 2: Booking History -->
+    <div class="account-view-panel" id="accountHistoryView">
+      <div id="historyList">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <script src="/screens/profile/profile.js"></script>
+</body>
+</html>

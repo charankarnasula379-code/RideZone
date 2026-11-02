@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideZone — Administrator Portal</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  
+  <!-- Typography: Space Grotesk (Headings), Inter (UI/Body) & JetBrains Mono (Technical/Numeric) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- ============================================================ -->
+  <!-- 1. ADMIN AUTHENTICATION SCREEN (Login Only)                  -->
+  <!-- ============================================================ -->
+  <div id="adminLoginScreen" class="admin-login-screen">
+    <div class="admin-login-card">
+      <div class="admin-login-brand">
+        <img src="/assets/logo.png" alt="RideZone Admin" class="admin-login-logo" width="136" height="68">
+        <p class="brand-subtitle">Executive Administrator Portal</p>
+      </div>
+
+      <div class="login-badge">Restricted Access • Staff Only</div>
+
+      <form id="adminLoginForm" class="admin-login-form">
+        <div class="form-group">
+          <label for="adminEmailInput">Administrator Email</label>
+          <input type="email" id="adminEmailInput" name="email" class="admin-input" placeholder="admin@gmail.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="adminPasswordInput">Password</label>
+          <input type="password" id="adminPasswordInput" name="password" class="admin-input" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
+
+        <div id="adminLoginError" class="auth-error-msg hidden"></div>
+
+        <button type="submit" id="adminLoginBtn" class="btn btn-primary btn-block">
+          <span class="btn-text">Authenticate Session</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+
+      <div class="admin-login-role-switch">
+        <span>Looking for customer rentals?</span>
+        <a href="/?auth=login" class="btn-admin-switch-user" id="switchToUserLoginBtn">&larr; User Login</a>
+      </div>
+
+      <div class="admin-login-footer">
+        <p>RideZone Fleet Management &copy; 2026</p>
+        <p class="footer-sec-note text-muted mt-1">Protected by JWT & Bcrypt Cryptographic Security</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 2. MAIN ADMIN APPLICATION WRAPPER                           -->
+  <!-- ============================================================ -->
+  <div id="adminAppScreen" class="admin-app-layout hidden">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand">
+        <img src="/assets/logo.png" alt="RideZone Admin" class="sidebar-brand-logo" width="76" height="38">
+        <span class="brand-role">ADMIN PORTAL</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">OPERATIONS</div>
+        <button class="nav-item active" data-nav="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-nav="vehicles">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+          <span>Vehicles</span>
+        </button>
+        <button class="nav-item" data-nav="bookings">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <span>Bookings</span>
+        </button>
+        <button class="nav-item" data-nav="users">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          <span>Customers</span>
+        </button>
+        <button class="nav-item" data-nav="payments">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 4H3c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h18c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H3V8h18v10zm-10-7H5v2h6v-2z"/></svg>
+          <span>Payments</span>
+        </button>
+
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">SYSTEM</div>
+
+        <button class="nav-item" data-nav="profile">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+          <span>Admin Profile</span>
+        </button>
+        <button class="nav-item nav-item-logout" id="sidebarLogoutBtn">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-user-chip" onclick="adminNav('profile')" style="cursor: pointer;">
+        <div class="user-avatar" id="sidebarAvatar">AD</div>
+        <div class="user-meta">
+          <div class="user-name" id="sidebarAdminName">Administrator</div>
+          <div class="user-role">Super Admin</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <div>
+            <h1 class="topbar-title" id="pageTitle">Dashboard</h1>
+            <p class="topbar-subtitle" id="pageSubtitle">Platform Overview & Real-Time Operational Statistics</p>
+          </div>
+        </div>
+        
+        <div class="topbar-right">
+          <a href="/" class="btn-customer-portal-switch" title="Return to Customer Rental Portal">&larr; Customer Portal</a>
+          <div class="live-clock" id="liveClockDisplay">--:--:--</div>
+          <div class="user-chip" onclick="adminNav('profile')" style="cursor: pointer;">
+            <div class="chip-avatar" id="topbarAvatar">AD</div>
+            <span class="chip-email" id="topbarAdminEmail">admin@gmail.com</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main View Container -->
+      <div class="admin-content" id="adminContent">
+
+        <!-- ============================================================ -->
+        <!-- SECTION 1: DASHBOARD                                         -->
+        <!-- ============================================================ -->
+        <section id="section-dashboard" class="admin-section active">
+          
+          <!-- 4 Primary Operational KPI Cards -->
+          <div class="kpi-top-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-gold">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="dashTotalVehicles">--</div>
+                <div class="kpi-title">Total Vehicles</div>
+                <div class="kpi-subtext"><span class="text-success font-weight-bold" id="dashAvailVehicles">--</span> available in showroom</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-blue">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="dashTotalBookings">--</div>
+                <div class="kpi-title">Total Bookings</div>
+                <div class="kpi-subtext"><span class="text-gold font-weight-bold" id="dashPendingBookings">--</span> pending requests</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-green">
+                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="dashRentalRevenue">--</div>
+                <div class="kpi-title">Rental Revenue</div>
+                <div class="kpi-subtext"><span class="text-muted" id="dashDepositsHeld">--</span> deposits in escrow</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-purple">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="dashTotalUsers">--</div>
+                <div class="kpi-title">Total Customers</div>
+                <div class="kpi-subtext"><span class="text-success font-weight-bold" id="dashActiveRentals">--</span> active rentals right now</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Telemetry Strip -->
+          <div class="telemetry-strip">
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-green"></span>
+              <span class="telemetry-label">Available:</span>
+              <strong id="telemAvail">--</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-gold"></span>
+              <span class="telemetry-label">Booked:</span>
+              <strong id="telemBooked">--</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-gray"></span>
+              <span class="telemetry-label">Maintenance:</span>
+              <strong id="telemMaint">--</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-blue"></span>
+              <span class="telemetry-label">Completed Trips:</span>
+              <strong id="telemCompleted">--</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-red"></span>
+              <span class="telemetry-label">Cancelled:</span>
+              <strong id="telemCancelled">--</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-dot dot-purple"></span>
+              <span class="telemetry-label">Refunds Processed:</span>
+              <strong id="telemRefunds">--</strong>
+            </div>
+          </div>
+
+          <!-- Analytics Area (2 Columns: Bookings Overview Trend + Top Booked Vehicles) -->
+          <div class="analytics-row">
+            <!-- Bookings Overview Bar Chart -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Booking Activity</h3>
+                  <p class="analytics-subtitle">Reservation frequency and revenue trends</p>
+                </div>
+                <div class="chart-tab-group">
+                  <button class="chart-tab-btn active" data-period="7d">Last 7 Days</button>
+                  <button class="chart-tab-btn" data-period="30d">Month</button>
+                </div>
+              </div>
+              
+              <!-- Visual Bar Chart Container -->
+              <div class="bar-chart-container" id="dashBookingsChart">
+                <!-- Dynamically populated bars -->
+              </div>
+            </div>
+
+            <!-- Top Booked Vehicles Ranking -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Top Vehicles</h3>
+                  <p class="analytics-subtitle">Highest rented models in showroom</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="adminNav('vehicles')">View Fleet</button>
+              </div>
+
+              <div class="top-vehicles-list" id="dashTopVehiclesList">
+                <!-- Dynamically populated top vehicles -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Shortcuts Bar -->
+          <div class="quick-actions-bar">
+            <div class="qa-title">Operations:</div>
+            <button class="btn btn-primary btn-sm" onclick="openAddVehicleModal()">+ Add Vehicle</button>
+            <button class="btn btn-secondary btn-sm" onclick="adminNav('bookings')">View Bookings</button>
+            <button class="btn btn-secondary btn-sm" onclick="adminNav('vehicles')">Fleet Inventory</button>
+            <button class="btn btn-secondary btn-sm" onclick="adminNav('users')">Customer Ledger</button>
+            <button class="btn btn-secondary btn-sm" onclick="adminNav('payments')">Payment Audit</button>
+          </div>
+
+          <!-- Recent Bookings Table Card -->
+          <div class="admin-card mt-4">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="box-heading">Recent Booking Requests</h3>
+                <p class="box-subheading">Latest reservations submitted by customers</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="adminNav('bookings')">View All &rarr;</button>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Schedule</th>
+                    <th>Rental Fee</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashRecentBookingsBody">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Loading live reservations...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 2: VEHICLES / FLEET                                  -->
+        <!-- ============================================================ -->
+        <section id="section-vehicles" class="admin-section">
+          
+          <div class="section-toolbar">
+            <div class="toolbar-search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              <input type="text" id="fleetSearchInput" class="admin-input" placeholder="Search vehicle name, model, reg no...">
+            </div>
+
+            <div class="toolbar-filter-group">
+              <select id="fleetCategoryFilter" class="admin-select">
+                <option value="all">All Categories</option>
+                <option value="Electric">Electric</option>
+                <option value="Scooter">Scooter</option>
+                <option value="Bike">Bike</option>
+                <option value="High-End">High-End</option>
+              </select>
+
+              <select id="fleetStatusFilter" class="admin-select">
+                <option value="all">All Statuses</option>
+                <option value="Available">Available</option>
+                <option value="Booked">Booked</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
+
+              <button class="btn btn-primary" onclick="openAddVehicleModal()">
+                <span>+ Add Vehicle</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Vehicle</th>
+                    <th>Category</th>
+                    <th>Registration No</th>
+                    <th>Hourly Rate</th>
+                    <th>Deposit</th>
+                    <th>Bookings</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                    <th>Live State</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminVehiclesTableBody">
+                  <tr><td colspan="10" class="text-center py-4 text-muted">Loading fleet inventory...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 3: BOOKINGS                                          -->
+        <!-- ============================================================ -->
+        <section id="section-bookings" class="admin-section">
+          
+          <!-- Status Tabs Filter Bar -->
+          <div class="status-tabs-container">
+            <div class="status-tabs">
+              <button class="status-tab-btn active" data-bstatus="all">All <span class="tab-badge" id="tabCountAll">0</span></button>
+              <button class="status-tab-btn" data-bstatus="pending">Pending <span class="tab-badge" id="tabCountPending">0</span></button>
+              <button class="status-tab-btn" data-bstatus="confirmed">Confirmed <span class="tab-badge" id="tabCountConfirmed">0</span></button>
+              <button class="status-tab-btn" data-bstatus="active">Active <span class="tab-badge" id="tabCountActive">0</span></button>
+              <button class="status-tab-btn" data-bstatus="completed">Completed <span class="tab-badge" id="tabCountCompleted">0</span></button>
+              <button class="status-tab-btn" data-bstatus="cancelled">Cancelled <span class="tab-badge" id="tabCountCancelled">0</span></button>
+            </div>
+          </div>
+
+          <!-- Secondary Filters Strip -->
+          <div class="section-toolbar">
+            <div class="toolbar-search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              <input type="text" id="bookingsSearchInput" class="admin-input" placeholder="Search booking ID, rider name, phone, vehicle...">
+            </div>
+
+            <div class="toolbar-filter-group">
+              <select id="bookingsVehicleFilter" class="admin-select">
+                <option value="all">All Vehicles</option>
+              </select>
+
+              <button class="btn btn-secondary" id="bookingsRefreshBtn">
+                <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:currentColor;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                <span>Refresh</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Pickup Date & Time</th>
+                    <th>Duration</th>
+                    <th>Rental Price</th>
+                    <th>Deposit</th>
+                    <th>Total Paid</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminBookingsTableBody">
+                  <tr><td colspan="11" class="text-center py-4 text-muted">Loading reservations...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 4: CUSTOMERS                                         -->
+        <!-- ============================================================ -->
+        <section id="section-users" class="admin-section">
+          
+          <div class="section-toolbar">
+            <div class="toolbar-search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              <input type="text" id="customerSearchInput" class="admin-input" placeholder="Search customer name, email, phone...">
+            </div>
+
+            <div class="toolbar-filter-group">
+              <select id="customerStatusFilter" class="admin-select">
+                <option value="all">All Accounts</option>
+                <option value="Active">Active Accounts</option>
+                <option value="Suspended">Suspended Accounts</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Customer</th>
+                    <th>Email Address</th>
+                    <th>Phone</th>
+                    <th>Total Bookings</th>
+                    <th>Active Rentals</th>
+                    <th>Lifetime Spend</th>
+                    <th>Account Status</th>
+                    <th>Member Since</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminUsersTableBody">
+                  <tr><td colspan="10" class="text-center py-4 text-muted">Loading customer accounts...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 5: PAYMENTS & FINANCIAL AUDIT                        -->
+        <!-- ============================================================ -->
+        <section id="section-payments" class="admin-section">
+          
+          <!-- 4 Financial KPI Summary Cards -->
+          <div class="kpi-top-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-green">
+                <svg viewBox="0 0 24 24"><path d="M21 4H3c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h18c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H3V8h18v10zm-10-7H5v2h6v-2z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="payGrossTotal">--</div>
+                <div class="kpi-title">Gross Volume Processed</div>
+                <div class="kpi-subtext">All completed & confirmed payments</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-gold">
+                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="payNetRental">--</div>
+                <div class="kpi-title">Net Rental Revenue</div>
+                <div class="kpi-subtext">Base rental fees earned</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-blue">
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="payDepositsHeld">--</div>
+                <div class="kpi-title">Security Deposits Held</div>
+                <div class="kpi-subtext">Held in escrow until return</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-purple">
+                <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+              </div>
+              <div class="kpi-data">
+                <div class="kpi-value" id="payTotalRefunds">--</div>
+                <div class="kpi-title">Refunds Processed</div>
+                <div class="kpi-subtext">100% full refund policy</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payments Filter Strip -->
+          <div class="section-toolbar">
+            <div class="toolbar-search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              <input type="text" id="paymentsSearchInput" class="admin-input" placeholder="Search transaction ID, booking ID, customer...">
+            </div>
+
+            <div class="toolbar-filter-group">
+              <select id="paymentsStatusFilter" class="admin-select">
+                <option value="all">All Payment Statuses</option>
+                <option value="paid">Paid / Completed</option>
+                <option value="refunded">Refunded</option>
+                <option value="pending">Pending</option>
+              </select>
+
+              <button class="btn btn-secondary" id="paymentsRefreshBtn">Refresh Ledger</button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Booking Ref</th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Rental (₹)</th>
+                    <th>Deposit (₹)</th>
+                    <th>Total (₹)</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                    <th>Timestamp</th>
+                    <th>Bill</th>
+                  </tr>
+                </thead>
+                <tbody id="adminPaymentsTableBody">
+                  <tr><td colspan="11" class="text-center py-4 text-muted">Loading transaction ledger...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 6: REDESIGNED ADMIN PROFILE                          -->
+        <!-- ============================================================ -->
+        <section id="section-profile" class="admin-section">
+          
+          <div class="admin-profile-container">
+            <!-- 1. Top Executive Banner Card -->
+            <div class="admin-profile-header-card">
+              <div class="admin-profile-avatar-box" id="accAdminAvatar">
+                <span id="accAdminAvatarInitial">SA</span>
+                <img id="accAdminAvatarImg" class="hidden" alt="Admin Avatar">
+              </div>
+              <div class="admin-profile-header-info">
+                <h2 id="accAdminName">System Administrator</h2>
+                <p id="accAdminEmail">admin@gmail.com</p>
+                <div class="admin-profile-meta-tags">
+                  <span class="badge badge-gold" id="accAdminRole">Super Admin</span>
+                  <span class="badge badge-success">Active</span>
+                  <span class="text-muted" style="font-size:12px;" id="accAdminSinceTag">Member Since Aug 2026</span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" id="btnOpenEditProfileModal" onclick="openEditProfileModal()">
+                <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:currentColor;"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                <span>Edit Profile</span>
+              </button>
+            </div>
+
+            <!-- 2. Two-Column Grid: Personal Info & Account Governance -->
+            <div class="admin-profile-grid-2">
+              
+              <!-- Personal Information Card -->
+              <div class="admin-card">
+                <div class="admin-card-header">
+                  <div>
+                    <h3 class="box-heading">Personal Information</h3>
+                    <p class="box-subheading">Administrator personal &amp; contact details</p>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="openEditProfileModal()">
+                    <svg viewBox="0 0 24 24" style="width:13px; height:13px; fill:currentColor;"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                    <span>Edit Information</span>
+                  </button>
+                </div>
+
+                <div class="diag-key-val">
+                  <div class="diag-row"><span class="diag-label">Full Name</span><strong id="piAdminName">System Administrator</strong></div>
+                  <div class="diag-row"><span class="diag-label">Email Address</span><strong id="piAdminEmail">admin@gmail.com</strong></div>
+                  <div class="diag-row"><span class="diag-label">Phone Number</span><strong id="piAdminPhone">+91 98765 43210</strong></div>
+                  <div class="diag-row"><span class="diag-label">Office Location</span><span id="piAdminLocation">Hyderabad, Telangana, India</span></div>
+                </div>
+              </div>
+
+              <!-- Account Information Card -->
+              <div class="admin-card">
+                <div class="admin-card-header">
+                  <div>
+                    <h3 class="box-heading">Account Information</h3>
+                    <p class="box-subheading">System credentials &amp; platform governance</p>
+                  </div>
+                </div>
+
+                <div class="diag-key-val">
+                  <div class="diag-row"><span class="diag-label">Role</span><span class="badge badge-gold">Super Admin</span></div>
+                  <div class="diag-row"><span class="diag-label">Account Status</span><span class="badge badge-success">Active</span></div>
+                  <div class="diag-row"><span class="diag-label">Department</span><span>Fleet Operations &amp; Governance</span></div>
+                  <div class="diag-row"><span class="diag-label">System Time Zone</span><span>IST (GMT +05:30) Asia/Kolkata</span></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 3. Security & Password Card -->
+            <div class="admin-card mt-3">
+              <div class="admin-card-header">
+                <div>
+                  <h3 class="box-heading">Security</h3>
+                  <p class="box-subheading">Cryptographic administrator password protection</p>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" id="togglePasswordFormBtn" onclick="togglePasswordForm()">
+                  Change Password
+                </button>
+              </div>
+
+              <div id="passwordStaticView" class="diag-key-val">
+                <div class="diag-row"><span class="diag-label">Password</span><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div>
+                <div class="diag-row"><span class="diag-label">Two-Factor Authentication</span><span class="badge badge-success">Session Protected</span></div>
+              </div>
+
+              <form id="adminPasswordForm" class="profile-form-inner hidden">
+                <div class="form-group">
+                  <label for="profCurrentPass">Current Password</label>
+                  <input type="password" id="profCurrentPass" class="admin-input" placeholder="••••••••••••" required autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                  <label for="profNewPass">New Password</label>
+                  <input type="password" id="profNewPass" class="admin-input" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                  <label for="profConfirmPass">Confirm New Password</label>
+                  <input type="password" id="profConfirmPass" class="admin-input" placeholder="Repeat new password" required minlength="6" autocomplete="new-password">
+                </div>
+
+                <div id="pwdUpdateMsg" class="auth-success-msg hidden"></div>
+                <div id="pwdUpdateError" class="auth-error-msg hidden"></div>
+
+                <div style="display:flex; gap:10px; margin-top:10px;">
+                  <button type="submit" id="savePwdBtn" class="btn btn-primary">
+                    <span>Update Password</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary" onclick="togglePasswordForm()">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 7: ADD VEHICLE (Full Page)                           -->
+        <!-- ============================================================ -->
+        <section id="section-add-vehicle" class="admin-section">
+          <!-- Page Header with Back Button -->
+          <div class="full-page-header">
+            <button class="btn btn-ghost back-btn" onclick="adminNav('vehicles')">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;vertical-align:middle;margin-right:4px;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+              Back to Vehicles
+            </button>
+            <div class="full-page-title-wrap">
+              <div class="modal-breadcrumb">Fleet Management &rsaquo; Add New Vehicle</div>
+              <h2 class="full-page-title">Add Vehicle to Fleet</h2>
+              <p class="full-page-subtitle">Register a new motorcycle or scooter into the RideZone showroom fleet</p>
+            </div>
+          </div>
+
+          <form id="addVehicleForm">
+            <div id="addVehError" class="auth-error-msg hidden mb-3"></div>
+
+            <!-- Section 1: Basic Vehicle Information & Pricing -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">1. Basic Vehicle Information &amp; Rates</h4>
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="addVehName">Vehicle Name *</label>
+                  <input type="text" id="addVehName" class="admin-input" placeholder="e.g. Royal Enfield Hunter 350" required>
+                </div>
+                <div class="form-group">
+                  <label for="addVehBrand">Brand *</label>
+                  <input type="text" id="addVehBrand" class="admin-input" placeholder="e.g. Royal Enfield" required>
+                </div>
+                <div class="form-group">
+                  <label for="addVehModel">Model / Trim *</label>
+                  <input type="text" id="addVehModel" class="admin-input" placeholder="e.g. Hunter 350 Dapper" required>
+                </div>
+                <div class="form-group">
+                  <label for="addVehCategory">Category *</label>
+                  <select id="addVehCategory" class="admin-select" required>
+                    <option value="Bike">Bike</option>
+                    <option value="Scooter">Scooter</option>
+                    <option value="Electric">Electric</option>
+                    <option value="High-End">High-End</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="addVehRegNo">Registration Number</label>
+                  <input type="text" id="addVehRegNo" class="admin-input" placeholder="Auto-generated if empty">
+                </div>
+                <div class="form-group">
+                  <label for="addVehYear">Manufacturing Year</label>
+                  <input type="number" id="addVehYear" class="admin-input" value="2024" min="2020" max="2027">
+                </div>
+                <div class="form-group">
+                  <label for="addVehFuel">Fuel Type</label>
+                  <select id="addVehFuel" class="admin-select">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Electric">Electric</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="addVehTransmission">Transmission</label>
+                  <select id="addVehTransmission" class="admin-select">
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic">Automatic</option>
+                    <option value="CVT">CVT</option>
+                    <option value="6-Speed + Slipper Clutch">6-Speed + Slipper Clutch</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="addVehStatus">Initial Status</label>
+                  <select id="addVehStatus" class="admin-select">
+                    <option value="Active">Active (Available for Rent)</option>
+                    <option value="Inactive">Inactive (Maintenance)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="addVehPrice">Hourly Rental Price (₹/hr) *</label>
+                  <input type="number" id="addVehPrice" class="admin-input" placeholder="e.g. 320" required min="50" max="5000">
+                </div>
+                <div class="form-group">
+                  <label for="addVehDeposit">Security Deposit (₹) *</label>
+                  <input type="number" id="addVehDeposit" class="admin-input" value="2000" required min="500" max="10000">
+                </div>
+                <div class="form-group">
+                  <label for="addVehRating">Initial Rating (★)</label>
+                  <input type="number" id="addVehRating" class="admin-input" value="4.8" step="0.1" min="1.0" max="5.0">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Vehicle Images & Gallery -->
+            <div class="form-section-card" style="border:1px solid var(--rz-border-gold); background:var(--rz-surface);">
+              <div class="image-manager-header" style="border-bottom:1px solid var(--rz-border); padding-bottom:10px; margin-bottom:14px;">
+                <div>
+                  <h4 class="form-section-title mb-0" style="font-size:13px; font-weight:700; color:var(--rz-gold-dark);">2. Vehicle Showcase Photo &amp; Gallery</h4>
+                  <p class="text-muted" style="font-size:12px; margin-top:2px;">Upload primary showcase cover image and multiple high-resolution gallery angles</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <select id="addVehPresetPicker" class="admin-select" style="width:auto; font-size:12px; padding:6px 10px;" onchange="applyAddVehPreset(this.value)">
+                    <option value="">✨ Quick Fleet Image Presets...</option>
+                    <option value="/assets/hunter.png">Royal Enfield Hunter 350</option>
+                    <option value="/assets/tvs.png">TVS Apache RR 310</option>
+                    <option value="/assets/yamaha.png">Yamaha MT-15</option>
+                    <option value="/assets/bajaj.png">Bajaj Pulsar</option>
+                    <option value="/assets/ktm.png">KTM RC 390</option>
+                    <option value="/assets/kawasaki.png">Kawasaki Ninja 300</option>
+                    <option value="/assets/ather.png">Ather 450X</option>
+                    <option value="/assets/honda.png">Honda Activa 6G</option>
+                    <option value="/assets/suzuki.png">Suzuki Access 125</option>
+                  </select>
+                </div>
+              </div>
+              <div class="image-upload-box" onclick="document.getElementById('addVehImageFiles').click()">
+                <input type="file" id="addVehImageFiles" multiple accept="image/png, image/jpeg, image/webp" style="display:none;">
+                <div style="font-size:28px; margin-bottom:8px;">📷</div>
+                <div style="font-weight:700; font-size:14px; color:var(--rz-text-primary);">Click to Browse &amp; Upload Vehicle Photos</div>
+                <div class="text-muted" style="font-size:12px; margin-top:4px;">Supports PNG, JPG, WEBP &bull; Up to 5MB each &bull; Select multiple files at once</div>
+              </div>
+              <div id="addVehUploadLoading" class="upload-loading-badge hidden mt-2">
+                <span class="spinner-border spinner-border-sm"></span> Uploading pictures to RideZone storage...
+              </div>
+              <div id="addVehUploadError" class="auth-error-msg hidden mt-2"></div>
+              <div style="margin-top:14px;">
+                <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--rz-text-secondary); margin-bottom:8px;">
+                  Current Vehicle Images (<span id="addVehCount">1</span>)
+                </div>
+                <div class="image-manager-grid" id="addVehImageGrid"></div>
+                <input type="hidden" id="addVehMainImage" value="/assets/hunter.png">
+              </div>
+            </div>
+
+            <!-- Section 3: Technical Specifications -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">3. Technical Specifications</h4>
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="addSpecMotor">Engine / Motor</label>
+                  <input type="text" id="addSpecMotor" class="admin-input" placeholder="e.g. 349 cc Single Cylinder">
+                </div>
+                <div class="form-group">
+                  <label for="addSpecPower">Max Power</label>
+                  <input type="text" id="addSpecPower" class="admin-input" placeholder="e.g. 20.2 bhp @ 6,100 rpm">
+                </div>
+                <div class="form-group">
+                  <label for="addSpecTorque">Max Torque</label>
+                  <input type="text" id="addSpecTorque" class="admin-input" placeholder="e.g. 27 Nm @ 4,000 rpm">
+                </div>
+                <div class="form-group">
+                  <label for="addSpecTopSpeed">Top Speed</label>
+                  <input type="text" id="addSpecTopSpeed" class="admin-input" placeholder="e.g. 114 km/h">
+                </div>
+                <div class="form-group">
+                  <label for="addSpecRange">Fuel Tank / Range</label>
+                  <input type="text" id="addSpecRange" class="admin-input" placeholder="e.g. 13.0 Litres">
+                </div>
+                <div class="form-group">
+                  <label for="addSpecBrakes">Braking System</label>
+                  <input type="text" id="addSpecBrakes" class="admin-input" placeholder="e.g. Front &amp; Rear Disc (Dual ABS)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Description & Highlights -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">4. Description &amp; Key Highlights</h4>
+              <div class="form-group">
+                <label for="addVehDesc">Vehicle Overview Description</label>
+                <textarea id="addVehDesc" class="admin-textarea" rows="3" placeholder="Provide an executive summary of performance, ergonomics, and reliability..."></textarea>
+              </div>
+            </div>
+
+            <!-- Sticky Bottom Action Bar -->
+            <div class="full-page-actions">
+              <button type="button" class="btn btn-secondary" onclick="adminNav('vehicles')">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Cancel
+              </button>
+              <button type="submit" id="submitAddVehicleBtn" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                Save Vehicle to Fleet
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 8: EDIT VEHICLE (Full Page)                          -->
+        <!-- ============================================================ -->
+        <section id="section-edit-vehicle" class="admin-section">
+          <!-- Page Header with Back Button -->
+          <div class="full-page-header">
+            <button class="btn btn-ghost back-btn" onclick="adminNav('vehicles')">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;vertical-align:middle;margin-right:4px;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+              Back to Vehicles
+            </button>
+            <div class="full-page-title-wrap">
+              <div class="modal-breadcrumb">Fleet Management &rsaquo; Edit Vehicle</div>
+              <h2 class="full-page-title" id="editPageVehTitle">Edit Vehicle Record</h2>
+              <p class="full-page-subtitle">Update vehicle details, swap showcase photos, and manage gallery</p>
+            </div>
+          </div>
+
+          <form id="editVehicleForm">
+            <input type="hidden" id="editVehId">
+            <div id="editVehError" class="auth-error-msg hidden mb-3"></div>
+
+            <!-- Section 1: Basic Information & Pricing -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">1. Basic Vehicle Information &amp; Rates</h4>
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="editVehName">Vehicle Name *</label>
+                  <input type="text" id="editVehName" class="admin-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="editVehBrand">Brand</label>
+                  <input type="text" id="editVehBrand" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editVehModel">Model / Trim</label>
+                  <input type="text" id="editVehModel" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editVehCategory">Category *</label>
+                  <select id="editVehCategory" class="admin-select" required>
+                    <option value="Bike">Bike</option>
+                    <option value="Scooter">Scooter</option>
+                    <option value="Electric">Electric</option>
+                    <option value="High-End">High-End</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="editVehRegNo">Registration Number *</label>
+                  <input type="text" id="editVehRegNo" class="admin-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="editVehYear">Manufacturing Year</label>
+                  <input type="number" id="editVehYear" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editVehFuel">Fuel Type</label>
+                  <select id="editVehFuel" class="admin-select">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Electric">Electric</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="editVehTransmission">Transmission</label>
+                  <input type="text" id="editVehTransmission" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editVehStatus">Fleet Status *</label>
+                  <select id="editVehStatus" class="admin-select" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive (Maintenance)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="editVehPrice">Hourly Price (₹/hr) *</label>
+                  <input type="number" id="editVehPrice" class="admin-input" required min="50" max="5000">
+                </div>
+                <div class="form-group">
+                  <label for="editVehDeposit">Security Deposit (₹) *</label>
+                  <input type="number" id="editVehDeposit" class="admin-input" required min="500" max="10000">
+                </div>
+                <div class="form-group">
+                  <label for="editVehRating">Customer Rating (★)</label>
+                  <input type="number" id="editVehRating" class="admin-input" step="0.1" min="1.0" max="5.0">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Vehicle Images & Gallery -->
+            <div class="form-section-card" style="border:1px solid var(--rz-border-gold); background:var(--rz-surface);">
+              <div class="image-manager-header" style="border-bottom:1px solid var(--rz-border); padding-bottom:10px; margin-bottom:14px;">
+                <div>
+                  <h4 class="form-section-title mb-0" style="font-size:13px; font-weight:700; color:var(--rz-gold-dark);">2. Vehicle Showcase Photo &amp; Gallery</h4>
+                  <p class="text-muted" style="font-size:12px; margin-top:2px;">Change primary showcase photo, upload additional images, or remove photos</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <select id="editVehPresetPicker" class="admin-select" style="width:auto; font-size:12px; padding:6px 10px;" onchange="applyEditVehPreset(this.value)">
+                    <option value="">✨ Quick Fleet Image Presets...</option>
+                    <option value="/assets/hunter.png">Royal Enfield Hunter 350</option>
+                    <option value="/assets/tvs.png">TVS Apache RR 310</option>
+                    <option value="/assets/yamaha.png">Yamaha MT-15</option>
+                    <option value="/assets/bajaj.png">Bajaj Pulsar</option>
+                    <option value="/assets/ktm.png">KTM RC 390</option>
+                    <option value="/assets/kawasaki.png">Kawasaki Ninja 300</option>
+                    <option value="/assets/ather.png">Ather 450X</option>
+                    <option value="/assets/honda.png">Honda Activa 6G</option>
+                    <option value="/assets/suzuki.png">Suzuki Access 125</option>
+                  </select>
+                </div>
+              </div>
+              <div class="image-upload-box" onclick="document.getElementById('editVehImageFiles').click()">
+                <input type="file" id="editVehImageFiles" multiple accept="image/png, image/jpeg, image/webp" style="display:none;">
+                <div style="font-size:28px; margin-bottom:8px;">📷</div>
+                <div style="font-weight:700; font-size:14px; color:var(--rz-text-primary);">Click to Browse &amp; Upload New Vehicle Photos</div>
+                <div class="text-muted" style="font-size:12px; margin-top:4px;">Supports PNG, JPG, WEBP &bull; Up to 5MB each &bull; Select multiple files at once</div>
+              </div>
+              <div id="editVehUploadLoading" class="upload-loading-badge hidden mt-2">
+                <span class="spinner-border spinner-border-sm"></span> Uploading pictures to RideZone storage...
+              </div>
+              <div id="editVehUploadError" class="auth-error-msg hidden mt-2"></div>
+              <div style="margin-top:14px;">
+                <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--rz-text-secondary); margin-bottom:8px;">
+                  Vehicle Gallery &amp; Showcase Angles (<span id="editVehCount">0</span>)
+                </div>
+                <div class="image-manager-grid" id="editVehImageGrid"></div>
+                <input type="hidden" id="editVehMainImage">
+              </div>
+            </div>
+
+            <!-- Section 3: Specifications -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">3. Technical Specifications</h4>
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="editSpecMotor">Engine / Motor</label>
+                  <input type="text" id="editSpecMotor" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editSpecPower">Power</label>
+                  <input type="text" id="editSpecPower" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editSpecTorque">Torque</label>
+                  <input type="text" id="editSpecTorque" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editSpecTopSpeed">Top Speed</label>
+                  <input type="text" id="editSpecTopSpeed" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editSpecRange">Fuel Tank / Range</label>
+                  <input type="text" id="editSpecRange" class="admin-input">
+                </div>
+                <div class="form-group">
+                  <label for="editSpecBrakes">Braking System</label>
+                  <input type="text" id="editSpecBrakes" class="admin-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Description -->
+            <div class="form-section-card">
+              <h4 class="form-section-title">4. Overview Description</h4>
+              <div class="form-group">
+                <label for="editVehDesc">Description</label>
+                <textarea id="editVehDesc" class="admin-textarea" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- Sticky Bottom Action Bar -->
+            <div class="full-page-actions">
+              <button type="button" class="btn btn-secondary" onclick="adminNav('vehicles')">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Cancel
+              </button>
+              <button type="submit" id="submitEditVehicleBtn" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL 3: VEHICLE VIEW / DETAILS (With Gallery & Embedded Mini Calendar) -->
+  <div id="vehicleDetailModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog modal-lg">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb">Vehicles &gt; Vehicle View</div>
+          <h3 class="admin-modal-title" id="modalVehName">Vehicle Name</h3>
+          <p class="modal-subtitle" id="modalVehSubtitle">Category • Registration</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button type="button" class="admin-back-action-btn" data-close-modal>← Back</button>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+      </div>
+
+      <div class="admin-modal-body">
+        <div class="veh-view-grid">
+          
+          <!-- Left Column: Compact Proportional Showcase -->
+          <div class="veh-view-media-col">
+            <div class="veh-main-image-wrap">
+              <img id="modalVehMainImg" src="/assets/ather.png" alt="Vehicle Showcase">
+            </div>
+            <div class="veh-thumb-row" id="modalVehThumbs">
+              <!-- Dynamically populated thumbnails -->
+            </div>
+
+            <!-- Pricing Matrix -->
+            <div class="veh-pricing-card mt-3">
+              <div class="pricing-matrix-row">
+                <div class="pm-col"><span class="pm-label">Hourly Rate</span><strong class="pm-val text-gold" id="modalVehHourly">₹--/hr</strong></div>
+                <div class="pm-col"><span class="pm-label">Deposit</span><strong class="pm-val" id="modalVehDeposit">₹--</strong></div>
+                <div class="pm-col"><span class="pm-label">Rating</span><strong class="pm-val text-gold">★ <span id="modalVehRating">--</span></strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Specs & Mini Availability Calendar -->
+          <div class="veh-view-info-col">
+            
+            <!-- Description -->
+            <div class="detail-section-block">
+              <h4 class="detail-block-title">Overview Description</h4>
+              <p class="veh-desc-text" id="modalVehDescription">Loading description...</p>
+            </div>
+
+            <!-- Specifications Grid -->
+            <div class="detail-section-block">
+              <h4 class="detail-block-title">Verified Specifications</h4>
+              <div class="specs-grid-compact" id="modalVehSpecsGrid">
+                <!-- Dynamically populated specs -->
+              </div>
+            </div>
+
+            <!-- Embedded Mini Availability Calendar -->
+            <div class="detail-section-block">
+              <div class="mini-cal-header-row">
+                <h4 class="detail-block-title mb-0">Availability Schedule</h4>
+                <div class="mini-cal-badge" id="modalVehLiveStatusBadge">Available</div>
+              </div>
+              
+              <div class="mini-cal-wrapper" id="modalVehCalendarBox">
+                <div class="mini-cal-top">
+                  <button type="button" class="mini-cal-nav-btn" id="modalCalPrevBtn">&lt;</button>
+                  <span class="mini-cal-month-label" id="modalCalMonthLabel">Month Year</span>
+                  <button type="button" class="mini-cal-nav-btn" id="modalCalNextBtn">&gt;</button>
+                </div>
+                
+                <div class="mini-cal-weekdays">
+                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                
+                <div class="mini-cal-grid" id="modalCalGrid">
+                  <!-- Dynamically populated calendar days -->
+                </div>
+
+                <div class="mini-cal-footer">
+                  <div class="mini-cal-legend">
+                    <span class="legend-dot avail"></span><span>Available</span>
+                    <span class="legend-dot booked"></span><span>Reserved</span>
+                  </div>
+                  <div class="mini-cal-selected-info" id="modalCalSelectedText">
+                    Click any day to inspect reservations.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-modal-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+        <button type="button" class="btn btn-primary" id="modalEditVehBtn">Edit Vehicle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: BOOKING REQUEST DETAILS -->
+  <div id="bookingDetailModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog modal-lg">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb">Bookings &gt; Booking Request Details</div>
+          <h3 class="admin-modal-title" id="bModalId">Reservation #RZ-2A635F91</h3>
+          <p class="modal-subtitle" id="bModalCreated">Booked on --</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button type="button" class="admin-back-action-btn" data-close-modal>← Back</button>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+      </div>
+
+      <div class="admin-modal-body" id="bModalContent">
+        <!-- Dynamically populated booking details -->
+      </div>
+
+      <div class="admin-modal-actions" id="bModalActions">
+        <!-- Dynamically populated status-aware action buttons (Accept Booking / Cancel / Return) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: CUSTOMER DETAILS / PROFILE -->
+  <div id="userDetailModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog modal-lg">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb">Customers &gt; Customer Profile</div>
+          <h3 class="admin-modal-title" id="uModalName">Customer Name</h3>
+          <p class="modal-subtitle" id="uModalEmail">user@example.com</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button type="button" class="admin-back-action-btn" data-close-modal>← Back</button>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+      </div>
+
+      <div class="admin-modal-body" id="uModalContent">
+        <!-- Dynamically populated customer profile and booking history -->
+      </div>
+
+      <div class="admin-modal-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 6: PAYMENT RECEIPT BREAKDOWN -->
+  <div id="paymentDetailModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb">Payments &gt; Customer Bill</div>
+          <h3 class="admin-modal-title" id="payModalTxnId">TXN-8F92A1B3</h3>
+          <p class="modal-subtitle" id="payModalDate">Transaction Date</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button type="button" class="admin-back-action-btn" data-close-modal>← Back</button>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+      </div>
+
+      <div class="admin-modal-body" id="payModalContent">
+        <!-- Dynamically populated payment receipt / bill -->
+      </div>
+
+      <div class="admin-modal-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+        <button type="button" class="btn btn-primary" onclick="window.print()">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          <span>Print Bill</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 7: EDIT ADMIN PROFILE (With In-Modal Profile Photo Management) -->
+  <div id="editProfileModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb">Admin Profile &gt; Edit Profile</div>
+          <h3 class="admin-modal-title">Edit Administrator Profile</h3>
+          <p class="modal-subtitle">Update your personal information, profile portrait, and contact details</p>
+        </div>
+        <button class="modal-close-btn" data-close-modal>&times;</button>
+      </div>
+
+      <form id="adminEditProfileModalForm">
+        <div class="admin-modal-body">
+          <div id="editProfError" class="auth-error-msg hidden mb-3"></div>
+          <div id="editProfSuccess" class="auth-success-msg hidden mb-3"></div>
+
+          <!-- Section: Profile Photo Manager Inside Edit Profile -->
+          <div class="form-section-card mb-3" style="background:var(--rz-surface-soft); border:1px solid var(--rz-border);">
+            <label style="display:block; font-size:13px; font-weight:700; color:var(--rz-text); margin-bottom:8px;">Profile Portrait Photo</label>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div class="profile-photo-preview-large" id="editModalPhotoPreview" style="width:64px; height:64px; border-radius:50%; background:var(--rz-gold-soft); border:2px solid var(--rz-border-gold); display:flex; align-items:center; justify-content:center; overflow:hidden; font-weight:700; color:var(--rz-gold-dark); font-size:20px; flex-shrink:0;">
+                <span id="editModalPhotoInitial">AD</span>
+                <img id="editModalPhotoImg" class="hidden" alt="Profile Photo" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="flex:1;">
+                <input type="file" id="editModalPhotoInput" accept="image/png, image/jpeg, image/webp" style="display:none;">
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('editModalPhotoInput').click()">
+                    📷 Change Photo
+                  </button>
+                  <button type="button" class="btn btn-ghost btn-sm text-danger" id="btnEditModalRemovePhoto" onclick="removeEditModalPhoto()">
+                    Remove Photo
+                  </button>
+                </div>
+                <div class="text-muted mt-1" style="font-size:11.5px;">PNG, JPG, or WEBP &bull; Max 5MB allowed size</div>
+                <div id="editModalPhotoStatus" class="text-gold mt-1 hidden" style="font-size:12px; font-weight:600;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="editProfName">Full Name *</label>
+            <input type="text" id="editProfName" class="admin-input" required minlength="2" placeholder="e.g. System Administrator">
+          </div>
+
+          <div class="form-group">
+            <label for="editProfEmail">Email Address *</label>
+            <input type="email" id="editProfEmail" class="admin-input" required placeholder="admin@gmail.com">
+          </div>
+
+          <div class="form-group">
+            <label for="editProfPhone">Phone Number</label>
+            <input type="text" id="editProfPhone" class="admin-input" placeholder="+91 98765 43210">
+          </div>
+
+          <div class="form-group">
+            <label for="editProfLocation">Office Location</label>
+            <input type="text" id="editProfLocation" class="admin-input" placeholder="Hyderabad, Telangana, India">
+          </div>
+
+          <div class="form-group">
+            <label>Security Role</label>
+            <input type="text" class="admin-input" value="Super Admin (Executive Access)" disabled style="background:#F5F3ED; cursor:not-allowed;">
+          </div>
+        </div>
+
+        <div class="admin-modal-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" id="saveEditProfModalBtn" class="btn btn-primary">Save All Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 8: UNIFIED ADMIN CONFIRMATION DIALOG -->
+  <div id="adminConfirmModal" class="admin-modal-backdrop hidden">
+    <div class="admin-modal-dialog" style="max-width: 480px;">
+      <div class="admin-modal-header">
+        <div>
+          <div class="modal-breadcrumb" id="confirmModalBreadcrumb">Operations &gt; Confirmation</div>
+          <h3 class="admin-modal-title" id="confirmModalTitle">Confirm Action</h3>
+        </div>
+        <button class="modal-close-btn" data-close-confirm>&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p id="confirmModalMessage" style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 16px;"></p>
+        <div id="confirmModalDetails" class="diag-key-val form-section-card hidden" style="margin-bottom: 0;"></div>
+      </div>
+      <div class="admin-modal-actions">
+        <button type="button" class="btn btn-secondary" data-close-confirm id="confirmModalCancelBtn">Back</button>
+        <button type="button" class="btn btn-primary" id="confirmModalActionBtn">Confirm Action</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 9: DEDICATED ADMIN CANCELLATION WORKFLOW -->
+  <div id="adminCancelBookingModal" class="admin-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="adminCancelModalTitle">
+    <div class="admin-modal-dialog" style="max-width: 560px;">
+      
+      <!-- STEP 1: REASON SELECTION -->
+      <div id="adminCancelStep1">
+        <div class="admin-modal-header">
+          <div>
+            <div class="modal-breadcrumb">Bookings &gt; Admin Cancellation</div>
+            <h3 class="admin-modal-title" id="adminCancelModalTitle">Cancel Booking</h3>
+            <p class="modal-subtitle">Are you sure you want to cancel this reservation?</p>
+          </div>
+          <button class="modal-close-btn" data-close-cancel-modal>&times;</button>
+        </div>
+
+        <div class="admin-modal-body">
+          <!-- Reservation Summary Card -->
+          <div class="admin-cancel-summary-box">
+            <div class="admin-cancel-summary-item">
+              <span class="admin-cancel-label">Booking Reference</span>
+              <span class="admin-cancel-val font-mono" id="adminCancelRef">#RZ-XXXXXXXX</span>
+            </div>
+            <div class="admin-cancel-summary-item">
+              <span class="admin-cancel-label">Vehicle</span>
+              <span class="admin-cancel-val" id="adminCancelVehicle">Kawasaki Ninja 300</span>
+            </div>
+            <div class="admin-cancel-summary-item">
+              <span class="admin-cancel-label">Pickup Schedule</span>
+              <span class="admin-cancel-val font-mono" id="adminCancelPickup">6 Sep 2026 · 10:00 AM</span>
+            </div>
+            <div class="admin-cancel-summary-item">
+              <span class="admin-cancel-label">Customer</span>
+              <span class="admin-cancel-val" id="adminCancelCustomer">Customer Name</span>
+            </div>
+          </div>
+
+          <!-- Reason Selection -->
+          <div class="form-group mt-3">
+            <label for="adminCancelReasonSelect" style="font-weight: 700; color: var(--rz-text, #1A1A1A); display: flex; align-items: center; justify-content: space-between;">
+              <span>Cancellation Reason <span class="text-danger">*</span></span>
+              <span class="text-muted" style="font-size: 11px; font-weight: normal;">Mandatory</span>
+            </label>
+            <p class="text-muted mb-2" style="font-size: 12px;">Why are you cancelling this booking?</p>
+            <select id="adminCancelReasonSelect" class="admin-select" style="width: 100%; height: 42px; font-size: 13.5px;">
+              <option value="" disabled selected>-- Select a reason --</option>
+              <option value="Vehicle unavailable">Vehicle unavailable</option>
+              <option value="Vehicle requires urgent maintenance">Vehicle requires urgent maintenance</option>
+              <option value="Vehicle damaged / unsafe">Vehicle damaged / unsafe</option>
+              <option value="Vehicle already reserved">Vehicle already reserved</option>
+              <option value="Pickup/location unavailable">Pickup/location unavailable</option>
+              <option value="Customer eligibility issue">Customer eligibility issue</option>
+              <option value="Payment/verification issue">Payment/verification issue</option>
+              <option value="Administrative decision">Administrative decision</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Additional Details -->
+          <div class="form-group mt-3">
+            <label id="adminCancelDetailsLabel" for="adminCancelDetailsInput" style="font-weight: 700; color: var(--rz-text, #1A1A1A); display: flex; align-items: center; justify-content: space-between;">
+              <span>Additional details <span id="adminCancelDetailsRequiredIndicator" class="text-muted" style="font-weight: normal;">(optional)</span></span>
+              <span id="adminCancelDetailsBadge" class="text-muted" style="font-size: 11px; font-weight: normal;">Optional for predefined reasons</span>
+            </label>
+            <textarea id="adminCancelDetailsInput" class="admin-input" rows="3" placeholder="Enter additional details..." style="width: 100%; resize: vertical; min-height: 70px; font-family: inherit; font-size: 13px;"></textarea>
+            <div id="adminCancelReasonHelp" class="text-muted mt-1" style="font-size: 11.5px;"></div>
+          </div>
+        </div>
+
+        <div class="admin-modal-actions">
+          <button type="button" class="btn btn-secondary" data-close-cancel-modal>Keep Booking</button>
+          <button type="button" class="btn btn-primary" id="adminCancelNextBtn" disabled>Continue to Confirmation &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: CONFIRMATION STEP -->
+      <div id="adminCancelStep2" class="hidden">
+        <div class="admin-modal-header">
+          <div>
+            <div class="modal-breadcrumb">Bookings &gt; Confirm Cancellation</div>
+            <h3 class="admin-modal-title">Cancel this booking?</h3>
+            <p class="modal-subtitle">Review the cancellation impact before confirming.</p>
+          </div>
+          <button class="modal-close-btn" data-close-cancel-modal>&times;</button>
+        </div>
+
+        <div class="admin-modal-body">
+          <div class="admin-cancel-confirm-preview">
+            <div class="admin-cancel-preview-row">
+              <span class="preview-label">Reason:</span>
+              <strong class="preview-value text-danger" id="adminConfirmReasonVal">--</strong>
+            </div>
+            <div class="admin-cancel-preview-row">
+              <span class="preview-label">Additional details:</span>
+              <span class="preview-value" id="adminConfirmDetailsVal">None</span>
+            </div>
+            <div class="admin-cancel-preview-row">
+              <span class="preview-label">Refund to Customer:</span>
+              <strong class="preview-value font-mono text-gold" id="adminConfirmRefundVal">₹0</strong>
+            </div>
+          </div>
+
+          <div class="admin-cancel-impact-card mt-3">
+            <div class="impact-card-title">This action will:</div>
+            <ul class="impact-list">
+              <li>Cancel the reservation immediately</li>
+              <li>Trigger the existing 100% full refund policy</li>
+              <li>Notify the customer in their Booking History</li>
+              <li>Record the cancellation reason and administrator audit log</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="admin-modal-actions">
+          <button type="button" class="btn btn-secondary" id="adminCancelBackBtn">&larr; Go Back</button>
+          <button type="button" class="btn btn-danger" id="adminCancelFinalBtn">Confirm Cancellation</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Admin Controller Logic -->
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
